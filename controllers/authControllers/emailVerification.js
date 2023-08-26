@@ -5,7 +5,7 @@ require('dotenv/config');
 
 const verify = async (req, res) => {
     try {
-        if (!req.error) {
+      
             //get data
             const user = req.user;
             const token = req.query.token;
@@ -23,9 +23,7 @@ const verify = async (req, res) => {
             //send response
             res.status(200).json({ msg: 'Successfully verified' });
 
-        } else {
-            res.status(400).json(req.error);
-        }
+        
     } catch (err) {
         res.status(400).json({ msg: 'Verification Failed' });
     }

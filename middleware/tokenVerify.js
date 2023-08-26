@@ -6,10 +6,7 @@ const tokenVerify = async (req, res, next) => {
         const authToken = req.headers.Authorization;
         const tokenParts = authToken.split(' '); // Split "Bearer <token>"
         if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-            const Error3 = new Error();
-            Error3.type = "invalidFormat";
-            Error3.msg = "Invalid/Expired link";
-            throw Error3;
+            return res.status(401).json({ type: 'invalidFormat', msg: 'Invalid/Expired link' });
         }
         const token = tokenParts[1]; // Extract the token
 
@@ -47,23 +44,19 @@ const tokenVerify = async (req, res, next) => {
 
 
         if (!token) {
-            const Error1 = new Error();
-            Error1.type = "tokenError";
-            Error1.msg = "No token provided";
-            throw Error1;
+            return res.status(401).json({ type: 'tokenError', msg: 'No token provided' });
+            
         }
         //check token is valid or not
         const invalidToken = await BlockedToken.findOne({ where: { token: token } });
 
         if (invalidToken) {
-            const Error2 = new Error();
-            Error2.type = "invalidToken";
-            Error2.msg = "Invalid/Expired link";
-            throw Error2;
+            return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
         }
+
         //verify token
         const decoded = await verifyToken(token, secret);
-        // console.log(decoded);
+   
         //set user in req
         req.user = decoded;
 
@@ -71,9 +64,7 @@ const tokenVerify = async (req, res, next) => {
         next()
     } catch (error) {
         //set error in req
-        req.error = error;
-        //next middleware
-        next()
+        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
 

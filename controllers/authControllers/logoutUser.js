@@ -3,9 +3,7 @@ const Auth = require('../../models/Auth');
 
 const loginUser = async(req, res) => {
     try {
-        if(req.error) {
-            throw req.error;
-        }
+        
         
         // get the user from the request
         const user = req.user;

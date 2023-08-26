@@ -4,11 +4,9 @@ const Auth = require('../../models/Auth');
 const tokenController = require('../../reusable_module/tokenController');
 
 const logoutAll = async (req, res) => {
-    // console.log('logoutAll');
+  
     try {
-        if (req.error) {
-            throw req.error;
-        }
+      
         // console.log('logoutAll');
         // get the user from the request
         const user = req.user;
@@ -37,7 +35,7 @@ const logoutAll = async (req, res) => {
         res.status(200).json({ msg: 'Logout from all devices' });
 
     } catch (error) {
-        console.log(error);
+        
         res.status(500).json({ msg: error.message });
     }
 };

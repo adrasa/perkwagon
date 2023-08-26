@@ -12,7 +12,7 @@ const updatePassword = async (req, res) => {
     }
 
     try {
-        if (!req.error) {
+       
             //get data from request
             const resetToken = req.query.token;
             const user = req.user;
@@ -38,10 +38,7 @@ const updatePassword = async (req, res) => {
             res.status(200).json({ msg: 'Password updated successfully' });
 
 
-        } else {
-            //send response
-            res.status(400).json(req.error);
-        }
+       
     } catch (error) {
         res.status(500).json(error.message);
     }
