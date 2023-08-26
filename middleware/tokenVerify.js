@@ -11,11 +11,12 @@ const tokenVerify = async (req, res, next) => {
             Error3.msg = "Invalid/Expired link";
             throw Error3;
         }
-
         const token = tokenParts[1]; // Extract the token
+
         // get the purpose of the token verification
-        const purpose = req.body.purpose;
-        // console.log(purpose);
+        const purpose = req.headers.purpose;
+
+
         let secret;
         switch (purpose) {
             case "emailVerification":
