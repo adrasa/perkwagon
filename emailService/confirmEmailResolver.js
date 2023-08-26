@@ -13,7 +13,7 @@ const confirmEmailResolver = async (user) => {
                 );
 
                 // const url = `${process.env.HOST}/auth/verifyEmail/${token}`;
-                const url = `${process.env.HOST}/api/auth/verifyEmail/${token}`;
+                const url = `${process.env.HOST}/auth/verifyEmail/${token}`;
                 // send the mail to the user
                 mailInfo = {
                     to: user.email,

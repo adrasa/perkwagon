@@ -27,7 +27,7 @@ const forgotPassword = async (req, res) => {
 
 
         // reset password link url
-        const url = `${process.env.HOST}/api/auth/resetPassword/${resetToken}`;
+        const url = `${process.env.HOST}/auth/resetPassword/${resetToken}`;
 
         const mailHTML = `Hi! ${email} please click on the link below to reset your password <a href=${url}>Reset Password</a>`
         const mailSubject = "Reset Password"
