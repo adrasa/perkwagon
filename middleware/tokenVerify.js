@@ -16,6 +16,7 @@ const tokenVerify = async (req, res, next) => {
         // get the purpose of the token verification
         const purpose = req.headers.purpose;
 
+        
 
         let secret;
         switch (purpose) {

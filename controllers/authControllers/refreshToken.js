@@ -6,32 +6,6 @@ const refreshToken = async (req, res) => {
     try {
         const expiresIn = process.env.EXPIRES_IN;
 
-        
-        // console.log(req.query.refreshToken);
-        
-        
-        // Check if the token is in the block list
-
-        const token = req.query.token;
-        // console.log(req.query);
-        // Validate the token
-        if (!token) {
-            return res.status(401).json({ 
-                type: 'NoTokenError',
-                msg: 'No token provided'
-             });
-        }
-        const blockedToken = await BlockedToken.findOne({ where: { token: token } });
-        if (blockedToken) {
-            // clear the cookie
-            await res.clearCookie('refreshToken');
-            // console.log(blockedToken);
-            return res.status(401).json({ 
-                type: 'invlidTokenError',
-                msg: 'Invalid/Expired token'
-             });
-        }
-
 
         // Verify the token
         const user = req.user;
@@ -56,7 +30,7 @@ const refreshToken = async (req, res) => {
         res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration });
 
     } catch (err) {
-        console.log(err);
+        
         res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
