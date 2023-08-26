@@ -6,7 +6,7 @@ require('dotenv/config');
 const authRoutes = require('./routes/authRoute');
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
-//welcome to perkwagoan... welcome aditya
+//welcome to perkwagon... welcome aditya
 
 // Express middleware to parse JSON requests
 app.use(express.json());
