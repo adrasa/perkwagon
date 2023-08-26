@@ -3,8 +3,17 @@ const { verifyToken } = require('../reusable_module/tokenController');
 const tokenVerify = async (req, res, next) => {
     try {
         //get token from query
-        const token = req.body.token;
-       // get the purpose of the token verification
+        const authToken = req.headers.Authorization;
+        const tokenParts = authToken.split(' '); // Split "Bearer <token>"
+        if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+            const Error3 = new Error();
+            Error3.type = "invalidFormat";
+            Error3.msg = "Invalid/Expired link";
+            throw Error3;
+        }
+
+        const token = tokenParts[1]; // Extract the token
+        // get the purpose of the token verification
         const purpose = req.body.purpose;
         // console.log(purpose);
         let secret;
@@ -28,7 +37,7 @@ const tokenVerify = async (req, res, next) => {
             case "logoutAll":
                 secret = process.env.JWT_ACCESS_SECRET;
                 break;
-                
+
             default:
                 secret = process.env.JWT_SECRET;
                 break;
@@ -42,7 +51,7 @@ const tokenVerify = async (req, res, next) => {
             throw Error1;
         }
         //check token is valid or not
-        const invalidToken = await BlockedToken.findOne({ where: { token: token} });
+        const invalidToken = await BlockedToken.findOne({ where: { token: token } });
 
         if (invalidToken) {
             const Error2 = new Error();
