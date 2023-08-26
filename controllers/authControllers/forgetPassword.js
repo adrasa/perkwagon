@@ -3,7 +3,7 @@ const sendMail = require("../../emailService/sendMail");
 const Auth = require("../../models/Auth");
 
 
-const forgotPassword = async (req, res) => {
+const forgetPassword = async (req, res) => {
     try {
         // get the user email from body
         const { email } = req.body;
@@ -13,9 +13,9 @@ const forgotPassword = async (req, res) => {
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
-    
+
         //user not verified
-        if(user.verified===false){
+        if (user.verified === false) {
             return res.status(401).json({ msg: 'Email not verified' });
         }
         // if exists, generate token
@@ -31,16 +31,16 @@ const forgotPassword = async (req, res) => {
 
         const mailHTML = `Hi! ${email} please click on the link below to reset your password <a href=${url}>Reset Password</a>`
         const mailSubject = "Reset Password"
-        
+
 
         const emailResponse = await sendMail(email, mailSubject, mailHTML)
 
         //send respond
-        res.status(200).send({msg:emailResponse})
+        res.status(200).send({ msg: emailResponse })
 
     } catch (err) {
-        res.status(500).json({msg: 'Internal Server Error'});
+        res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
 
-module.exports = forgotPassword;
+module.exports = forgetPassword;
