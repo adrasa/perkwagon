@@ -8,7 +8,6 @@ const verify = async (req, res) => {
       
             //get data
             const user = req.user;
-            const token = req.token;
 
             //update the verify status in database
             await Auth.update({ verified: true }, {
@@ -18,7 +17,9 @@ const verify = async (req, res) => {
             });
 
             
-
+            // put the token into blocked token table
+            await BlockedToken.create({ token: token, tokenExpiry: Date.now()+decoded.exp });
+            
             //send response
             res.status(200).json({ msg: 'Successfully verified' });
 

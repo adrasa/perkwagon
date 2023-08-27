@@ -14,7 +14,7 @@ const updatePassword = async (req, res) => {
     try {
        
             //get data from request
-            const resetToken = req.query.token;
+            const token = req.token;
             const user = req.user;
             const { password } = req.body;
 
@@ -30,6 +30,8 @@ const updatePassword = async (req, res) => {
                 }
             });
 
+            // put the token into blocked token table
+            await BlockedToken.create({ token: token, tokenExpiry: Date.now()+decoded.exp });
             
 
             //send response
