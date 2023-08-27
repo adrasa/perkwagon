@@ -9,9 +9,9 @@ const cookieParser = require('cookie-parser');
 
 // Express middleware to parse JSON requests
 const corsOptions = {
-    origin: 'https://perkwagon-test.netlify.app/', // Replace this with the client domain during production
+    origin: '*', // Replace this with the client domain during production
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
-    allowedHeaders: ['Authorization', 'purpose','Content-Type'],
+    allowedHeaders: ['Authorization', 'purpose','Content-Type','Accept','Origin','X-Requested-With','Access-Control-Allow-Origin','Access-Control-Allow-Headers','Access-Control-Allow-Methods','Access-Control-Allow-Credentials','Access-Contr'],
 }
 
 app.use(express.json());
