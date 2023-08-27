@@ -30,9 +30,7 @@ const updatePassword = async (req, res) => {
                 }
             });
 
-
-            // add token to blocked token table
-            await BlockedToken.create({ token: resetToken , tokenExpiry: Date.now()});
+            
 
             //send response
             res.status(200).json({ msg: 'Password updated successfully' });

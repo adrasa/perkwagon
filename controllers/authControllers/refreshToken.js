@@ -1,6 +1,5 @@
 const tokenController = require('../../reusable_module/tokenController');
 const { expiresInToMilliseconds } = require('../../reusable_module/utils');
-const BlockedToken = require('../../models/BlockedToken');
 
 const refreshToken = async (req, res) => {
     try {

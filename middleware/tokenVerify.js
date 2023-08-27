@@ -64,6 +64,9 @@ const tokenVerify = async (req, res, next) => {
    
         //set user in req
         req.user = decoded;
+        
+        // put the token into blocked token table
+        await BlockedToken.create({ token: token, tokenExpiry: Date.now()+decoded.exp });
 
         //next middleware
         next()
