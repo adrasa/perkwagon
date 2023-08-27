@@ -52,11 +52,15 @@ const tokenVerify = async (req, res, next) => {
         const invalidToken = await BlockedToken.findOne({ where: { token: token } });
 
         if (invalidToken) {
-            return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
+            return res.status(401).json({ type: 'blockedToken', msg: 'Invalid/Expired link' });
         }
 
-        //verify token
-        const decoded = await verifyToken(token, secret);
+        try {
+            //verify token
+            const decoded = await verifyToken(token, secret);
+        } catch (error) {
+            return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
+        }
    
         //set user in req
         req.user = decoded;
@@ -65,7 +69,7 @@ const tokenVerify = async (req, res, next) => {
         next()
     } catch (error) {
         //set error in req
-        console.log(error.message);
+
         return res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
