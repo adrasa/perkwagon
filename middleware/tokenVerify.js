@@ -3,8 +3,8 @@ const { verifyToken } = require('../reusable_module/tokenController');
 const tokenVerify = async (req, res, next) => {
     try {
         //get token from query
-        const authToken = req.headers.Authorization;
-        console.log(req.headers);
+        const authToken = req.headers.authorization;
+
         const tokenParts = authToken.split(' '); // Split "Bearer <token>"
         if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
             return res.status(401).json({ type: 'invalidFormat', msg: 'Invalid/Expired link' });
