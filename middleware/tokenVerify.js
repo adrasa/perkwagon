@@ -54,10 +54,10 @@ const tokenVerify = async (req, res, next) => {
         if (invalidToken) {
             return res.status(401).json({ type: 'blockedToken', msg: 'Invalid/Expired link' });
         }
-
+        let decoded;
         try {
             //verify token
-            const decoded = await verifyToken(token, secret);
+            decoded = await verifyToken(token, secret);
         } catch (error) {
             return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
         }
@@ -69,7 +69,6 @@ const tokenVerify = async (req, res, next) => {
         next()
     } catch (error) {
         //set error in req
-        console.log(error.message);
         return res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
