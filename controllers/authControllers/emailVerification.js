@@ -8,7 +8,7 @@ const verify = async (req, res) => {
       
             //get data
             const user = req.user;
-
+            const token = req.token;
             //update the verify status in database
             await Auth.update({ verified: true }, {
                 where: {
