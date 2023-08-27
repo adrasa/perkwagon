@@ -8,8 +8,13 @@ const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
 // Express middleware to parse JSON requests
+const corsOptions = {
+    origin: '*', // Replace this with the client domain during production
+    allowedHeaders: ['Authorization', 'purpose']
+}
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 
