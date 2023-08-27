@@ -4,7 +4,7 @@ const tokenVerify = async (req, res, next) => {
     try {
         //get token from query
         const authToken = req.headers.Authorization;
-        console.log(authToken);
+        console.log(req.headers);
         const tokenParts = authToken.split(' '); // Split "Bearer <token>"
         if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
             return res.status(401).json({ type: 'invalidFormat', msg: 'Invalid/Expired link' });
