@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const corsOptions = {
     origin: 'https://perkwagon-test.netlify.app/', // Replace this with the client domain during production
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
-    allowedHeaders: ['Authorization', 'purpose']
+    allowedHeaders: ['Authorization', 'purpose','Content-Type'],
 }
 
 app.use(express.json());
