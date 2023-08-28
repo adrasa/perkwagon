@@ -1,6 +1,5 @@
 // Purpose: Logout user from all devices
-const BlockedToken = require('../../models/BlockedToken');
-const Auth = require('../../models/Auth');
+const { BlockedToken, Auth } = require('../../models/index');
 const tokenController = require('../../reusable_module/tokenController');
 
 const logoutAll = async (req, res) => {

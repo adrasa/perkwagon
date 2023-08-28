@@ -1,4 +1,4 @@
-const BlockedToken = require('../models/BlockedToken');
+const { BlockedToken } = require('../../models/index');
 const { verifyToken } = require('../reusable_module/tokenController');
 const tokenVerify = async (req, res, next) => {
     try {
@@ -56,7 +56,7 @@ const tokenVerify = async (req, res, next) => {
 
         //verify token
         const decoded = await verifyToken(token, secret);
-   
+        
         //set user in req
         req.user = decoded;
 

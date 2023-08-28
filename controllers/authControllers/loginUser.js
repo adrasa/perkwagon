@@ -1,5 +1,5 @@
-const { col } = require('sequelize');
-const Auth = require('../../models/Auth');
+
+const {Auth} = require('../../models/index');
 const tokenController = require('../../reusable_module/tokenController');
 const { expiresInToMilliseconds } = require('../../reusable_module/utils');
 const bcrypt = require('bcryptjs');

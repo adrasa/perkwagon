@@ -1,4 +1,4 @@
-const Auth = require('../../models/Auth');
+const {  Auth } = require('../../models/index');
 const bcrypt = require('bcryptjs');
 const cnfEmail = require('../../emailService/confirmEmailResolver');
 require('dotenv/config');

@@ -1,5 +1,4 @@
-const Auth = require('../../models/Auth');
-const BlockedToken = require('../../models/BlockedToken');
+const { BlockedToken, Auth } = require('../../models/index');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 

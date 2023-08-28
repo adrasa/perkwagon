@@ -1,5 +1,5 @@
 const cnfEmail = require("../../emailService/confirmEmailResolver");
-const Auth = require('../../models/Auth');
+const {  Auth } = require('../../models/index');
 
 const resendEmail = async (req, res) => {
     try {

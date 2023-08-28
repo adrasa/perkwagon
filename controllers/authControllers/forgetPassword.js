@@ -1,6 +1,6 @@
 const { genToken } = require("../../reusable_module/tokenController");
 const sendMail = require("../../emailService/sendMail");
-const Auth = require("../../models/Auth");
+const {Auth} = require("../../models/index");
 
 
 const forgetPassword = async (req, res) => {

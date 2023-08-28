@@ -1,6 +1,5 @@
 
-const BlockedToken = require('../../models/BlockedToken');
-const Auth = require('../../models/Auth');
+const {BlockedToken,Auth} = require('../../models/index');
 require('dotenv/config');
 
 const verify = async (req, res) => {
