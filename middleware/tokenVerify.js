@@ -3,7 +3,8 @@ const { verifyToken } = require('../reusable_module/tokenController');
 const tokenVerify = async (req, res, next) => {
     try {
         //get token from query
-        const authToken = req.headers.Authorization;
+        const authToken = req.headers.authorization;
+
         const tokenParts = authToken.split(' '); // Split "Bearer <token>"
         if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
             return res.status(401).json({ type: 'invalidFormat', msg: 'Invalid/Expired link' });
@@ -51,14 +52,20 @@ const tokenVerify = async (req, res, next) => {
         const invalidToken = await BlockedToken.findOne({ where: { token: token } });
 
         if (invalidToken) {
+            return res.status(401).json({ type: 'blockedToken', msg: 'Invalid/Expired link' });
+        }
+        let decoded;
+        try {
+            //verify token
+            decoded = await verifyToken(token, secret);
+        } catch (error) {
             return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
         }
-
-        //verify token
-        const decoded = await verifyToken(token, secret);
-        
+   
         //set user in req
         req.user = decoded;
+        req.token = token;
+        
 
         //next middleware
         next()

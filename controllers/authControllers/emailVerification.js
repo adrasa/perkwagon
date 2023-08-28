@@ -7,8 +7,7 @@ const verify = async (req, res) => {
       
             //get data
             const user = req.user;
-            const token = req.query.token;
-
+            const token = req.token;
             //update the verify status in database
             await Auth.update({ verified: true }, {
                 where: {
@@ -16,14 +15,16 @@ const verify = async (req, res) => {
                 }
             });
 
+            
             // put the token into blocked token table
-            await BlockedToken.create({ token: token, tokenExpiry: Date.now() });
-
+            await BlockedToken.create({ token: token, tokenExpiry: Date.now()+user.exp });
+            
             //send response
             res.status(200).json({ msg: 'Successfully verified' });
 
         
     } catch (err) {
+        console.log(err.message);
         res.status(400).json({ msg: 'Verification Failed' });
     }
 
