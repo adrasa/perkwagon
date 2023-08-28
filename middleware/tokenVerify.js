@@ -1,4 +1,4 @@
-const { BlockedToken } = require('../../models/index');
+const { BlockedToken } = require('../models/index');
 const { verifyToken } = require('../reusable_module/tokenController');
 const tokenVerify = async (req, res, next) => {
     try {
