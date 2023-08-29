@@ -1,5 +1,5 @@
 const {Users, Auth} = require('../../models/index');
-
+const {bucket,bucketName}=require('../../reusable_module/cloudStorage')
 const addUserDetails = async (req, res) => {
     try {
         const auth = Auth.findOne({ 
@@ -9,15 +9,21 @@ const addUserDetails = async (req, res) => {
         if(!auth){
             return res.status(404).json({ msg: 'User not found' });
         }
-        let url=null;
+        let imageUrl=null;
         if(req.file){
-            url=process.env.HOST+'/images/'+req.file.filename;
+            // Upload image to Google Cloud Storage
+            const remoteFileName = `images/${Date.now()}-${path.extname(req.file.originalname)}`;
+            const file = bucket.file(remoteFileName);
+            await file.save(req.file.buffer);
+
+            // Generate CDN URL for the uploaded image
+            imageUrl = `https://storage.googleapis.com/${bucketName}/${remoteFileName}`;
         }
         const newUser = {
             auth_id: req.user.auth_id,
             full_name: req.body.full_name,
             phone_number: req.body.phone_number,
-            profile_picture: url,
+            profile_picture: imageUrl,
             city: req.body.city,
             state: req.body.state,
         }

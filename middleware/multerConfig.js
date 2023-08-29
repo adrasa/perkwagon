@@ -1,14 +1,11 @@
 const multer = require('multer');
 const path= require('path');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/images');
-    },
-    filename: (req, file, cb) => {
-        cb(null,file.fieldname+"_"+ Date.now() + path.extname( file.originalname));
-    },
-});
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+    storage: multer.memoryStorage(), // Store in memory to then upload to Google Cloud Storage
+    limits: {
+        fileSize: 10 * 1024 * 1024, // Max file size (10MB)
+    },
+ });
 
 module.exports = upload;
