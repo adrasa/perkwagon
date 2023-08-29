@@ -9,11 +9,11 @@ const deleteAddress = async (req, res) => {
             return res.status(404).json({ msg: 'Address not found' });
         }
         await Addresses.destroy({
-            where: { address_id: req.params.address_id },
+            where: { address_id: req.params.address_id, auth_id: req.user.auth_id },
         });
         return res.status(200).json({ msg: 'Address deleted successfully' });
     } catch (err) {
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return res.status(500).json({ error: err.message });
     }
 }
 

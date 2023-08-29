@@ -34,8 +34,8 @@ ProductSpecification.belongsTo(Products, { foreignKey: 'product_id' });
 
 
 //Association: Users and Addresses one to many
-Auth.hasMany(Addresses, { foreignKey: 'user_id' });
-Addresses.belongsTo(Users, { foreignKey: 'user_id' });
+Auth.hasMany(Addresses, { foreignKey: 'auth_id' });
+Addresses.belongsTo(Users, { foreignKey: 'auth_id' });
 
 //Association: Orders and OrderItems one to many
 Orders.hasMany(OrderItems, { foreignKey: 'order_id' });
@@ -46,8 +46,8 @@ Products.hasMany(OrderItems, { foreignKey: 'product_id' });
 OrderItems.belongsTo(Products, { foreignKey: 'product_id' });
 
 //Association: Users and Orders one to many
-Auth.hasMany(Orders, { foreignKey: 'user_id' });
-Orders.belongsTo(Users, { foreignKey: 'user_id' });
+Auth.hasMany(Orders, { foreignKey: 'auth_id' });
+Orders.belongsTo(Users, { foreignKey: 'auth_id' });
 
 //Association: Addresses and Orders one to many
 Addresses.hasMany(Orders, { foreignKey: 'address_id' });

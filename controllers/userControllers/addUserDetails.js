@@ -1,4 +1,5 @@
 const {Users, Auth} = require('../../models/index');
+const path=require('path');
 const {bucket,bucketName}=require('../../reusable_module/cloudStorage')
 const addUserDetails = async (req, res) => {
     try {
@@ -12,7 +13,7 @@ const addUserDetails = async (req, res) => {
         let imageUrl=null;
         if(req.file){
             // Upload image to Google Cloud Storage
-            const remoteFileName = `images/${Date.now()}-${path.extname(req.file.originalname)}`;
+            const remoteFileName = `images/${Date.now()}${path.extname(req.file.originalname)}`;
             const file = bucket.file(remoteFileName);
             await file.save(req.file.buffer);
 

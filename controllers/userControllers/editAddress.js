@@ -25,12 +25,13 @@ const editAddress=async(req,res)=>{
             is_default:req.body.is_default
         },{
             where:{
-                address_id:req.params.address_id
+                address_id:req.params.address_id,
+                auth_id:req.user.auth_id
             }
         });
         return res.status(200).json({msg:'Address updated successfully'});
     }catch(err){
-        return res.status(500).json({error:'Internal Server Error'});
+        return res.status(500).json({error:err.message});
     }
 }
 module.exports=editAddress;
