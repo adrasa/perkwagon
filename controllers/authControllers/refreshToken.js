@@ -3,16 +3,21 @@ const { expiresInToMilliseconds } = require('../../reusable_module/utils');
 
 const refreshToken = async (req, res) => {
     try {
-        const expiresIn = process.env.EXPIRES_IN;
+        
+        // get the refresh token from the cookie
+        const refreshToken = req.cookies.refreshToken;
 
+        // check if the refresh token exists
+        if (!refreshToken) {
+            return res.status(401).json({type:'UnauthorizedDevice',msg: 'No refresh token found, authorization denied' });
+        }
 
-        // Verify the token
-        const user = req.user;
-        if (!user) {
-            return res.status(401).json({
-                type: 'NoUserError', 
-                msg: 'No user found'
-             });
+        let user;
+        // Verify the refresh token
+        try {
+            user = await tokenController.verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
+        } catch (err) {
+            return res.status(401).json({type:'UnauthorizedDevice',msg: 'Invalid refresh token, authorization denied' });
         }
 
         // Generate new access token

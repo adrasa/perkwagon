@@ -33,7 +33,7 @@ const updatePasswordRules = [
 router.get('/verifyEmail', tokenVerify, emailVerification);
 router.post('/register', registerValidationRules, registerUser);
 router.post('/login', loginValidationRules, loginUser);
-router.get('/refreshtoken', tokenVerify, refreshToken);
+router.get('/refreshtoken', refreshToken);
 router.post('/forgetPassword', loginValidationRules, forgetPassword);
 router.patch('/resetPassword', tokenVerify, updatePasswordRules, updatePassword);
 router.post('/resendEmail', resendEmail);
