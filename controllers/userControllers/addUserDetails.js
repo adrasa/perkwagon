@@ -28,7 +28,7 @@ const addUserDetails = async (req, res) => {
 
         return res.status(201).json({ msg: 'User created successfully', user});
     } catch (err) {
-        // return res.status(500).json({ error: 'Internel Server Error' });
+       
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
