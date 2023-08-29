@@ -9,15 +9,15 @@ const getAddresses = require('../controllers/userControllers/getAddresses');
 const editAddress = require('../controllers/userControllers/editAddress');
 const addAddresses = require('../controllers/userControllers/addAddress');
 const deleteAddress = require('../controllers/userControllers/deleteAddress');
-
+const upload= require('../middleware/multerConfig');
 
 //Define routes
-router.post('/addUserDetails', tokenVerify, addUserDetails);
+router.post('/addUserDetails', tokenVerify,upload.single('image'), addUserDetails); //profile->fieldname in frontend
 router.get('/getUserDetails', tokenVerify, getUserDetails);
-router.put('/updateUserDetails', tokenVerify, editUserDetails);
+router.put('/updateUserDetails', tokenVerify, upload.single('image'), editUserDetails);
 router.get('/orders',tokenVerify, getOrders);
 router.get('/addresses', tokenVerify, getAddresses);
 router.put('/editAddress/:address_id', tokenVerify, editAddress);
-router.post('addAddress', tokenVerify, addAddresses);
+router.post('/addAddress',  addAddresses);
 router.delete('/deleteAddress/:address_id', tokenVerify, deleteAddress);
 module.exports = router;

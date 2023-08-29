@@ -1,4 +1,4 @@
-const {Orders, OrderItems, Products, Sellers} = require('../../models/index');
+const {Orders, OrderItems, Products, Sellers, Addresses} = require('../../models/index');
 const getOrders = async (req, res) => {
     try {
         const orders = await Orders.findAll({

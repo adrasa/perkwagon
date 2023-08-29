@@ -2,13 +2,9 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db/connection');
 
 const Users = sequelize.define('Users', {
-    user_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
     auth_id: { //Foreign key
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false,
     },
     full_name: {

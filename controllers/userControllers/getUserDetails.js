@@ -11,11 +11,11 @@ const getUserDetails = async (req, res) => {
 
         const user = await Users.findOne({
             where: { auth_id: req.user.auth_id },
-            attributes: ['full_name', 'phone_number', 'city', 'state'],
+            attributes: ['full_name', 'phone_number','profile_picture', 'city', 'state'],
         });
         
         user.dataValues.email = auth.email;
-        user.dataValues.signup_date = auth.createdAt.toISOString().slice(0, 10);
+        user.dataValues.signup_date = auth.createdAt;
 
         return res.status(200).json({ user });
     } catch (err) {

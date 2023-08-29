@@ -4,6 +4,7 @@ const sequelize = require('./db/connection');
 const cors = require('cors');
 require('dotenv/config');
 const authRoutes = require('./routes/authRoute');
+const userRoutes = require('./routes/userRoute');
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
@@ -15,10 +16,11 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(express.static('public'));
 
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/users', userRoutes);
 app.use('/', (req, res) => {
     res.send('Welcome to the API');
 });

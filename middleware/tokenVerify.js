@@ -37,7 +37,9 @@ const tokenVerify = async (req, res, next) => {
             case "logoutAll":
                 secret = process.env.JWT_ACCESS_SECRET;
                 break;
-
+            case "verifyUser":
+                secret = process.env.JWT_ACCESS_SECRET;
+                break;
             default:
                 secret = process.env.JWT_SECRET;
                 break;
