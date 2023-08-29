@@ -18,6 +18,6 @@ router.put('/updateUserDetails', tokenVerify, upload.single('image'), editUserDe
 router.get('/orders',tokenVerify, getOrders);
 router.get('/addresses', tokenVerify, getAddresses);
 router.put('/editAddress/:address_id', tokenVerify, editAddress);
-router.post('/addAddress',  addAddresses);
+router.post('/addAddress', tokenVerify, addAddresses);
 router.delete('/deleteAddress/:address_id', tokenVerify, deleteAddress);
 module.exports = router;
