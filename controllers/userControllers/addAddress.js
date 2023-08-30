@@ -24,7 +24,7 @@ const addAddresses=async(req,res)=>{
         
         return res.status(200).json({msg:'Address added successfully'});
     }catch(err){
-        return res.status(500).json({error:'Internal Server Error'});
+        return res.status(500).json({msg:'Internal Server Error'});
     }
 }
 module.exports=addAddresses;
