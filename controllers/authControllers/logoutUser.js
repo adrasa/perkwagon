@@ -7,10 +7,12 @@ const loginUser = async(req, res) => {
         
         // get the user from the request
         const user = req.user;
+        console.log(req.cookies.refreshToken);
 
         // find the user in the database
+        
         const userInDb = await Auth.findOne({ where: { email: user.email } });
-
+        
         // get the refresh token from the database
         const refreshToken = userInDb.tokens.tokens;
 
@@ -18,7 +20,6 @@ const loginUser = async(req, res) => {
         const newRefreshToken = refreshToken.filter(token => token !== req.cookies.refreshToken);
         userInDb.tokens = { tokens: newRefreshToken };
 
-        console.log(userInDb.tokens.tokens);
 
         await userInDb.save();
         
