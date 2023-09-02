@@ -36,8 +36,9 @@ const loginUser = async (req, res) => {
 
         // check if user is already logged in by checking the refresh token in cookie
         if(req.cookies.refreshToken && user.tokens.tokens.includes(req.cookies.refreshToken)){
+            console.log(req.cookies.refreshToken);
             return res.status(400).json({ type: 'alreadyLoggedIn', msg: 'User already logged in' });
-        }
+        } 
 
         //Get Access Token
         const accessToken = await tokenController.genToken(
