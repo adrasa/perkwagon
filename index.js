@@ -9,7 +9,8 @@ const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
 const corsOptions = {
-    origin: 'https://perkwagon-test.netlify.app/', // allow all origins
+    origin: 'https://perkwagon-test.netlify.app', // allow all origins
+
     credentials: true
 };
 
