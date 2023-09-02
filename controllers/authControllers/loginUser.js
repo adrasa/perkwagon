@@ -61,9 +61,6 @@ const loginUser = async (req, res) => {
         await user.save();
         
 
-        // remove old refresh token from the cookie
-        res.clearCookie('refreshToken');
-
         // store refresh token into the cookie
         await res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
