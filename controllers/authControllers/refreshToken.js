@@ -20,7 +20,6 @@ const refreshToken = async (req, res) => {
             
             // clear the cookie in the frontend
             res.clearCookie('refreshToken');
-
             return res.status(401).json({type:'UnauthorizedDevice',msg: 'Invalid refresh token, authorization denied' });
         }
 
@@ -38,7 +37,7 @@ const refreshToken = async (req, res) => {
         res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration });
 
     } catch (err) {
-        
+        console.log(err.message);
         res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
