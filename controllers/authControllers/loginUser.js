@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
 
         // store refresh token into the cookie
         await res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
+            httpOnly: false,
             expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
             secure: process.env.NODE_ENV === 'production' ? true : false
         });
