@@ -17,6 +17,9 @@ const loginUser = async(req, res) => {
         // delete the refresh token of the cookie from the database
         const newRefreshToken = refreshToken.filter(token => token !== req.cookies.refreshToken);
         userInDb.tokens = { tokens: newRefreshToken };
+
+        console.log(userInDb.tokens.tokens);
+
         await userInDb.save();
         
         
