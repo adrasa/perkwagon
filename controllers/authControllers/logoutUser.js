@@ -7,6 +7,8 @@ const loginUser = async(req, res) => {
         
         // get the user from the request
         const user = req.user;
+
+    
         console.log(req.cookies.refreshToken);
 
         // find the user in the database
@@ -14,10 +16,10 @@ const loginUser = async(req, res) => {
         const userInDb = await Auth.findOne({ where: { email: user.email } });
         
         // get the refresh token from the database
-        const refreshToken = userInDb.tokens.tokens;
+        const refreshTokens = userInDb.tokens.tokens;
 
         // delete the refresh token of the cookie from the database
-        const newRefreshToken = refreshToken.filter(token => token !== req.cookies.refreshToken);
+        const newRefreshToken = refreshTokens.filter(token => token !== req.cookies.refreshToken);
         userInDb.tokens = { tokens: newRefreshToken };
 
 
