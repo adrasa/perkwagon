@@ -17,6 +17,7 @@ const refreshToken = async (req, res) => {
         try {
             user = await tokenController.verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
         } catch (err) {
+            res.clearCookie('refreshToken');
             return res.status(401).json({type:'UnauthorizedDevice',msg: 'Invalid refresh token, authorization denied' });
         }
 
@@ -28,7 +29,7 @@ const refreshToken = async (req, res) => {
         );
 
         // Get the timestamp of the token expiration
-        const tokenExpiration = new Date(Date.now() + expiresInToMilliseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
+        const tokenExpiration = new Date(Date.now() + expiresInToMillWiseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
 
         //send response
         res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration });
