@@ -63,13 +63,11 @@ const loginUser = async (req, res) => {
 
         // store refresh token into the cookie
         await res.cookie('refreshToken', refreshToken, {
-            httpOnly: false,
-            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+            httpOnly: true,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: process.env.NODE_ENV === 'production' ? true : false
-        });
+        }).status(200).json({ msg: 'Login successful', typeofuser: user.typeofuser, acccessToken, tokenExpiration });
         
-        //send response
-        res.json({ msg: 'Login successful', typeofuser: user.typeofuser, acccessToken, tokenExpiration});
 
 
     } catch (err) {

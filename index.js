@@ -8,10 +8,13 @@ const userRoutes = require('./routes/userRoute');
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
-
+const corsOptions = {
+    origin: '*', // allow all origins
+    credentials: true,
+};
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 
