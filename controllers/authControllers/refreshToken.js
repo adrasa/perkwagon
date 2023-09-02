@@ -17,10 +17,8 @@ const refreshToken = async (req, res) => {
         try {
             user = await tokenController.verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
         } catch (err) {
-            
             // clear the cookie in the frontend
-            res.clearCookie('refreshToken');
-            return res.status(401).json({type:'UnauthorizedDevice',msg: 'Invalid refresh token, authorization denied' });
+            return res.clearCookie('refreshToken').status(401).json({type:'UnauthorizedDevice',msg: 'Invalid refresh token, authorization denied' });
         }
 
         // Generate new access token
