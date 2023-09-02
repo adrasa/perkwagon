@@ -8,9 +8,6 @@ const loginUser = async(req, res) => {
         // get the user from the request
         const user = req.user;
 
-    
-        console.log(req.cookies.refreshToken);
-
         // find the user in the database
         
         const userInDb = await Auth.findOne({ where: { email: user.email } });
