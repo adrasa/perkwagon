@@ -24,7 +24,10 @@ const loginUser = async(req, res) => {
         
         
 
-        await res.clearCookie('refreshToken');
+        await res.clearCookie('refreshToken',{
+            sameSite: "none",
+            secure: true,
+        });
         res.status(200).json({ msg: "Logout successful" });
 
     } catch (error) {
