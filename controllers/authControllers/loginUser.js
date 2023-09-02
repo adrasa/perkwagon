@@ -40,7 +40,7 @@ const loginUser = async (req, res) => {
         }
 
         //Get Access Token
-        const acccessToken = await tokenController.genToken(
+        const accessToken = await tokenController.genToken(
             { auth_id: user.auth_id, email: user.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
             process.env.JWT_ACCESS_SECRET
