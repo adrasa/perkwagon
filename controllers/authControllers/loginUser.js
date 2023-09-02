@@ -65,7 +65,8 @@ const loginUser = async (req, res) => {
         await res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
-            secure: process.env.NODE_ENV === 'production' ? true : false
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: 'none'
         }).status(200).json({ msg: 'Login successful', typeofuser: user.typeofuser, acccessToken, tokenExpiration });
         
 
