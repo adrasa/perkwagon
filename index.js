@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 
 const corsOptions = {
     origin: '*', // allow all origins
-    credentials: true,
+    credentials: true
 };
 
 app.use(express.json());
