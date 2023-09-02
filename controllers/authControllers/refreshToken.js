@@ -31,7 +31,7 @@ const refreshToken = async (req, res) => {
         );
 
         // Get the timestamp of the token expiration
-        const tokenExpiration = new Date(Date.now() + expiresInToMillWiseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
+        const tokenExpiration = new Date(Date.now() + expiresInToMilliseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
 
         //send response
         res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration });
