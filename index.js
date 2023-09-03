@@ -8,10 +8,11 @@ const userRoutes = require('./routes/userRoute');
 const adminRoutes=require('./routes/adminRoute')
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
-// Express middleware to parse JSON requests
 const corsOptions = {
-    allowedHeaders: ['Authorization', 'purpose','Content-Type','Accept','Origin','X-Requested-With','Access-Control-Allow-Origin','Access-Control-Allow-Headers','Access-Control-Allow-Methods','Access-Control-Allow-Credentials','Access-Contr'],
-}
+    origin: 'https://perkwagon-test.netlify.app', // allow all origins
+
+    credentials: true
+};
 
 app.use(express.json());
 app.use(cors(corsOptions));

@@ -30,7 +30,10 @@ const logoutAll = async (req, res) => {
         userInDb.tokens = { tokens: [] };
         await userInDb.save();
         // Remove refresh token from the cookie
-        res.clearCookie('refreshToken');
+        res.clearCookie('refreshToken',{
+            sameSite: "none",
+            secure: true,
+        });
         res.status(200).json({ msg: 'Logout from all devices' });
 
     } catch (error) {

@@ -36,11 +36,12 @@ const loginUser = async (req, res) => {
 
         // check if user is already logged in by checking the refresh token in cookie
         if(req.cookies.refreshToken && user.tokens.tokens.includes(req.cookies.refreshToken)){
+            console.log(req.cookies.refreshToken);
             return res.status(400).json({ type: 'alreadyLoggedIn', msg: 'User already logged in' });
-        }
+        } 
 
         //Get Access Token
-        const acccessToken = await tokenController.genToken(
+        const accessToken = await tokenController.genToken(
             { auth_id: user.auth_id, email: user.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
             process.env.JWT_ACCESS_SECRET
@@ -61,18 +62,14 @@ const loginUser = async (req, res) => {
         await user.save();
         
 
-        // remove old refresh token from the cookie
-        res.clearCookie('refreshToken');
-
         // store refresh token into the cookie
-        res.cookie('refreshToken', refreshToken, {
+        await res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-            secure: process.env.NODE_ENV === 'production' ? true : false
-        });
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            secure: true,
+            sameSite: 'none'
+        }).status(200).json({ msg: 'Login successful', typeofuser: user.typeofuser, accessToken, tokenExpiration });
         
-        //send response
-        res.json({ msg: 'Login successful', typeofuser: user.typeofuser, acccessToken, tokenExpiration});
 
 
     } catch (err) {

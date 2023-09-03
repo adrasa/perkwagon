@@ -9,19 +9,25 @@ const loginUser = async(req, res) => {
         const user = req.user;
 
         // find the user in the database
+        
         const userInDb = await Auth.findOne({ where: { email: user.email } });
-
+        
         // get the refresh token from the database
-        const refreshToken = userInDb.tokens.tokens;
+        const refreshTokens = userInDb.tokens.tokens;
 
         // delete the refresh token of the cookie from the database
-        const newRefreshToken = refreshToken.filter(token => token !== req.cookies.refreshToken);
+        const newRefreshToken = refreshTokens.filter(token => token !== req.cookies.refreshToken);
         userInDb.tokens = { tokens: newRefreshToken };
+
+
         await userInDb.save();
         
         
 
-        await res.clearCookie('refreshToken');
+        await res.clearCookie('refreshToken',{
+            sameSite: "none",
+            secure: true,
+        });
         res.status(200).json({ msg: "Logout successful" });
 
     } catch (error) {
