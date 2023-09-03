@@ -5,9 +5,9 @@ const cors = require('cors');
 require('dotenv/config');
 const authRoutes = require('./routes/authRoute');
 const userRoutes = require('./routes/userRoute');
+const adminRoutes=require('./routes/adminRoute')
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
-
 // Express middleware to parse JSON requests
 const corsOptions = {
     allowedHeaders: ['Authorization', 'purpose','Content-Type','Accept','Origin','X-Requested-With','Access-Control-Allow-Origin','Access-Control-Allow-Headers','Access-Control-Allow-Methods','Access-Control-Allow-Credentials','Access-Contr'],
@@ -20,6 +20,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/', (req, res) => {
     res.send('Welcome to the API');
 });

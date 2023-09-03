@@ -50,8 +50,21 @@ const Sellers = sequelize.define('Sellers', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    delivery_partner_id:{ //Foreign key
+    delivery_partner_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    shipping_charge: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+    order_tracking_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    terms_and_conditions: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     total_products_listed:{

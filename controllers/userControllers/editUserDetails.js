@@ -1,6 +1,5 @@
 const { Users, Auth } = require('../../models/index');
-const { bucket, bucketName } = require('../../reusable_module/cloudStorage');
-const path=require('path');
+const uploadImage = require('../../reusable_module/uploadImage');
 const editUserDetails = async (req, res) => {
     try {
         const auth = await Auth.findOne({
@@ -16,17 +15,12 @@ const editUserDetails = async (req, res) => {
 
         const { full_name, phone_number, city, state } = req.body;
         const updatedFields = {};
-   
-        if (req.file) {
-            // Upload image to Google Cloud Storage
-            const remoteFileName = `images/${Date.now()}${path.extname(req.file.originalname)}`;
-            const file = bucket.file(remoteFileName);
-            await file.save(req.file.buffer);
 
+        if (req.file) {
             // Generate CDN URL for the uploaded image
-            updatedFields.profile_picture = `https://storage.googleapis.com/${bucketName}/${remoteFileName}`;
+            updatedFields.profile_picture = await uploadImage(req.file.buffer, req.file.originalname );
         }
-        
+
         if (full_name) {
             updatedFields.full_name = full_name;
         }
@@ -36,8 +30,8 @@ const editUserDetails = async (req, res) => {
         if (city) {
             updatedFields.city = city;
         }
-        if(state){
-            updatedFields.state=state;
+        if (state) {
+            updatedFields.state = state;
         }
         await Users.update(
             updatedFields,
