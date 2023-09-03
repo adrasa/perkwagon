@@ -10,11 +10,10 @@ const allProducts = async (req, res) => {
 
 
         const products = await Products.findAll({
-            include: [
-                {
-                    model: Categories,
-                },
-            ],
+            include:
+            {
+                model: Categories,
+            },
             offset,
             limit,
             order: [['createdAt', 'DESC']],
