@@ -24,4 +24,5 @@ router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
 
 
+
 module.exports = router;

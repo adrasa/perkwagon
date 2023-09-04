@@ -18,7 +18,7 @@ const loginAdmin = async (req, res) => {
         // Get data from request body
         const { email, password } = req.body;
         // Check if admin exists
-        const admin = await A.findOne({ where: { email } });
+        const admin = await Admin.findOne({ where: { email } });
         if (!admin) {
             return res.status(404).json({ type: 'adminError', msg: 'Admin not found' });
         }
@@ -34,17 +34,21 @@ const loginAdmin = async (req, res) => {
             return res.status(401).json({ type:'invalid', msg: 'Invalid credentials' });
         }
 
-        // check if admin is already logged in by checking the refresh token in cookie
-        if(req.cookies.refreshToken && admin.tokens.tokens.includes(req.cookies.refreshToken)){
-            console.log(req.cookies.refreshToken);
-            return res.status(400).json({ type: 'alreadyLoggedIn', msg: 'admin already logged in' });
-        } 
+        // check if the admin is already logged in from another device
+        if(admin.token != null) {
+            try {
+                tokenController.verifyToken(admin.token,JWT_ADMIN_SECRET);
+                return res.status(401).json({type : 'multipleLogIn', msg: 'Already logged in from another device'});
+            } catch(err) {
+                console.log();
+            }
+        }
 
         //Get Access Token
         const accessToken = await tokenController.genToken(
             { auth_id: admin.auth_id, email: admin.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
-            process.env.JWT_ACCESS_SECRET
+            process.env.JWT_ADMIN_SECRET
         );
         
         // Get the timestamp of the token expiration
@@ -58,7 +62,7 @@ const loginAdmin = async (req, res) => {
         );
         
         // Save refresh token to database
-        admin.tokens = { tokens: [...admin.tokens.tokens, refreshToken] };
+        admin.token = refreshToken; 
         await admin.save();
         
 
