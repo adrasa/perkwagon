@@ -31,7 +31,7 @@ const Addresses = sequelize.define('Addresses', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    country: {
+    landmark: {
         type: DataTypes.STRING,
         allowNull: false,
     },

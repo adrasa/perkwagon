@@ -1,4 +1,5 @@
 const Auth = require('./Auth');
+const Admin=require('./Admin');
 const Users = require('./Users');
 const BlockedToken = require('./BlockedToken');
 const Sellers = require('./Sellers');
@@ -51,4 +52,4 @@ Orders.belongsTo(Addresses, { foreignKey: 'address_id' });
 
 
 
-module.exports = { Auth, BlockedToken, Sellers, Addresses, CartItems, Categories, OrderItems, Orders, Products,Users };
+module.exports = { Auth,Admin, BlockedToken, Sellers, Addresses, CartItems, Categories, OrderItems, Orders, Products,Users };

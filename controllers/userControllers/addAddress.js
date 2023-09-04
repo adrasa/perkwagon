@@ -18,7 +18,7 @@ const addAddresses=async(req,res)=>{
             city:req.body.city,
             state:req.body.state,
             pincode:req.body.pincode,
-            country:req.body.country,
+            landmark:req.body.landmark,
             is_default:req.body.is_default
         });
         

@@ -52,8 +52,21 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      delivery_partner_id: {
+      delivery_partner_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      shipping_charge: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      order_tracking_url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      terms_and_conditions: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       total_products_listed: {
@@ -97,7 +110,6 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-
       },
     });
   },

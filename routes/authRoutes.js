@@ -39,4 +39,6 @@ router.patch('/resetPassword', tokenVerify, updatePasswordRules, updatePassword)
 router.post('/resendEmail', resendEmail);
 router.get('/logout', tokenVerify, logoutUser);
 router.get('/logoutAll', tokenVerify, logoutAll);
+
+
 module.exports = router;

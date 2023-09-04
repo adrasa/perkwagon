@@ -3,11 +3,12 @@ const app = express();
 const sequelize = require('./db/connection');
 const cors = require('cors');
 require('dotenv/config');
-const authRoutes = require('./routes/authRoute');
-const userRoutes = require('./routes/userRoute');
-const adminRoutes=require('./routes/adminRoute')
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes=require('./routes/adminRoutes')
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
+
 const corsOptions = {
     origin: 'https://perkwagon-test.netlify.app', // allow all origins
 
