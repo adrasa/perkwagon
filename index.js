@@ -5,6 +5,7 @@ const cors = require('cors');
 require('dotenv/config');
 const authRoutes = require('./routes/authRoute');
 const userRoutes = require('./routes/userRoute');
+const adminRoutes = require('./routes/adminRoutes');
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
@@ -21,6 +22,8 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/admins', adminRoutes);
+
 app.use('/', (req, res) => {
     res.send('Welcome to the API');
 });

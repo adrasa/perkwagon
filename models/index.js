@@ -15,6 +15,7 @@ const ProductSpecification = require('./ProductSpecification');
 Auth.hasOne(Users, {foreignKey: 'auth_id'});
 Users.belongsTo(Auth, {foreignKey: 'auth_id'});
 
+
 //Association: DeliveryPartner and Sellers one to many
 DeliveryPartner.hasMany(Sellers, { foreignKey: 'delivery_partner_id' });
 Sellers.belongsTo(DeliveryPartner, { foreignKey: 'delivery_partner_id' });
