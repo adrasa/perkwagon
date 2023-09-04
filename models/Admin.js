@@ -27,10 +27,15 @@ const Admin = sequelize.define('Admin', {
     token:{
         type: DataTypes.TEXT,
         allowNull: true,
+    },
+    isRoot: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true       
     }
 },{
     tableName: 'admin'
 });
+
 
 
 module.exports = Admin;
