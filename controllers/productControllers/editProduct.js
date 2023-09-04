@@ -4,6 +4,7 @@ const editProduct = async (req, res) => {
         const  product_id  = req.params.product_id;
         const seller_id=req.body.seller_id;
         const seller=await Sellers.findOne({where:{seller_id}});
+        if(!seller) return res.status(400).json({msg:"No seller found"});
         const product = await Products.findOne({ where: { product_id } });
         if (!product) return res.status(400).json({ msg: 'No product found' });
         const updatedProduct = {
@@ -24,7 +25,7 @@ const editProduct = async (req, res) => {
             payment_method: req.body.payment_method,
             used_material: req.body.used_material,
             specification: { specification },
-            seller_id: req.body.seller_id,
+            seller_id: seller_id,
         };
         await Products.update(updatedProduct, { where: { product_id } });
 

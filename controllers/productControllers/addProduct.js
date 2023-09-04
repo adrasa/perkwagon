@@ -1,4 +1,4 @@
-const { Products} = require('../../models/index');
+const { Products, Sellers} = require('../../models/index');
 const uploadImage= require('../../reusable_module/uploadImage')
 const addProduct = async (req, res) => {
     try {
@@ -9,7 +9,7 @@ const addProduct = async (req, res) => {
         const specification = req.body.specification;
         const images = req.files;
         const imageUrls = [];
-
+        const tags = req.body.tags;
         for (const image of images) {
             const imageUrl = await uploadImage(image.buffer, image.originalname);
             imageUrls.push(imageUrl);
@@ -18,6 +18,7 @@ const addProduct = async (req, res) => {
         //create product
         const product = await Products.create({
             name: req.body.name,
+            tags: {tags},
             code: req.body.code,
             description: req.body.description,
             specification: req.body.specification,

@@ -15,6 +15,10 @@ const Products = sequelize.define('Products', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    tags:{
+        type: DataTypes.JSON,
+        allowNull: false,
+    },
     code:{
         type: DataTypes.STRING,
         allowNull: true,
