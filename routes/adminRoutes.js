@@ -40,18 +40,18 @@ router.get('/logout', logoutAdmin);
 router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
 
-router.post('/addSellerDetails', addSellerDetails);
-router.get('/allSellers', allSellers);
-router.delete('/deleteSeller/:seller_id', deleteSeller);
-router.put('/updateUserDetails/:seller_id', editSellerDetails);
-router.get('/dateFilteredSellers', dateFilteredSellers);
+router.post('/addSellerDetails',tokenVerify ,addSellerDetails);
+router.get('/allSellers', tokenVerify,allSellers);
+router.delete('/deleteSeller/:seller_id', tokenVerify,deleteSeller);
+router.put('/updateUserDetails/:seller_id', tokenVerify,editSellerDetails);
+router.get('/dateFilteredSellers', tokenVerify,dateFilteredSellers);
 
-router.post('/addProduct', addCategory, addProduct)
-router.get('/allProductsOfSpecifiedSeller/:seller_id', allProductsOfSpecifiedSeller);
-router.put('/editProduct/:product_id', addCategory, editProduct);
-router.delete('/deleteProduct/:product_id', deleteProduct);
-router.post('/addImage/:product_id', addImage);
-router.put('/deleteImage/:product_id', deleteImage);
-router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', dateFilteredProductsOfSpecifiedSeller)
+router.post('/addProduct', tokenVerify,addCategory, addProduct)
+router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify,allProductsOfSpecifiedSeller);
+router.put('/editProduct/:product_id', tokenVerify,addCategory, editProduct);
+router.delete('/deleteProduct/:product_id', tokenVerify,deleteProduct);
+router.post('/addImage/:product_id', tokenVerify,addImage);
+router.put('/deleteImage/:product_id', tokenVerify,deleteImage);
+router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify,dateFilteredProductsOfSpecifiedSeller)
 
 module.exports = router;
