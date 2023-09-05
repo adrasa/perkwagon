@@ -8,12 +8,16 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      product_images: {
+      images: {
         type: Sequelize.JSON,
         allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      tags: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
       code: {
@@ -34,6 +38,10 @@ module.exports = {
       },
       max_order: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      specification: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
       category_id: {
@@ -79,7 +87,7 @@ module.exports = {
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false,  
       },
     });
   },

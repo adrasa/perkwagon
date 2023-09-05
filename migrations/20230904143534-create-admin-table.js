@@ -2,43 +2,36 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('addresses', {
-      address_id: {
+    await queryInterface.createTable('admin', {
+      admin_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      auth_id: {
-        type: Sequelize.INTEGER,
+      email: {
+        type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true,
+        },
       },
-      address_line_1: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      address_line_2: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      city: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      state: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      pincode: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      landmark: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      is_default: {
+      verified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
+      },
+      token: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      isRoot: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -52,6 +45,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('addresses');
+    await queryInterface.dropTable('admin');
   },
 };

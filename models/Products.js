@@ -7,12 +7,16 @@ const Products = sequelize.define('Products', {
         primaryKey: true,
         autoIncrement: true,
     },
-    product_images: {
+    images: {
         type: DataTypes.JSON,
         allowNull: false,
     },
     name: {
         type: DataTypes.STRING,
+        allowNull: false,
+    },
+    tags:{
+        type: DataTypes.JSON,
         allowNull: false,
     },
     code:{
@@ -35,7 +39,10 @@ const Products = sequelize.define('Products', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    //make a image table max images per product
+    specification:{
+        type:DataTypes.JSON,
+        allowNull:false
+    },
     category_id: { //foreign key
         type: DataTypes.INTEGER,
         allowNull: false,

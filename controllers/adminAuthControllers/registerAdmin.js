@@ -1,4 +1,4 @@
-const {  Admin } = require('../../models/Admin');
+const {  Admin } = require('../../models/index');
 const bcrypt = require('bcryptjs');
 const cnfEmail = require('../../emailService/confirmEmailResolver');
 require('dotenv/config');

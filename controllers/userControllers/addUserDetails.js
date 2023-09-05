@@ -1,24 +1,18 @@
-const {Users, Auth} = require('../../models/index');
-const path=require('path');
-const {bucket,bucketName}=require('../../reusable_module/cloudStorage')
+const { Users, Auth } = require('../../models/index');
+const uploadImage = require('../../reusable_module/uploadImage')
 const addUserDetails = async (req, res) => {
     try {
-        const auth = Auth.findOne({ 
-            where: { auth_id: req.user.auth_id } ,
+        const auth = Auth.findOne({
+            where: { auth_id: req.user.auth_id },
             attributes: ['email', 'createdAt'],
         });
-        if(!auth){
+        if (!auth) {
             return res.status(404).json({ msg: 'User not found' });
         }
-        let imageUrl=null;
-        if(req.file){
-            // Upload image to Google Cloud Storage
-            const remoteFileName = `images/${Date.now()}${path.extname(req.file.originalname)}`;
-            const file = bucket.file(remoteFileName);
-            await file.save(req.file.buffer);
-
+        let imageUrl = null;
+        if (req.file) {
             // Generate CDN URL for the uploaded image
-            imageUrl = `https://storage.googleapis.com/${bucketName}/${remoteFileName}`;
+            imageUrl =await uploadImage(req.file.buffer, req.file.originalname);
         }
         const newUser = {
             auth_id: req.user.auth_id,
@@ -29,13 +23,13 @@ const addUserDetails = async (req, res) => {
             state: req.body.state,
         }
         const user = await Users.create(newUser);
-        
+
         user.dataValues.email = auth.email;
         user.dataValues.signup_date = await auth.createdAt;
 
-        return res.status(201).json({ msg: 'User created successfully', user});
+        return res.status(201).json({ msg: 'User details added successfully', user });
     } catch (err) {
-       
+
         return res.status(500).json({ msg: 'Internal Server Error' });
     }
 }

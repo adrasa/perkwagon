@@ -1,5 +1,5 @@
 // Purpose: Logout user
-const {  Admin } = require('../../models/Admin');
+const {  Admin } = require('../../models/index');
 
 const logoutAdmin = async(req, res) => {
     try {

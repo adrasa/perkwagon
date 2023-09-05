@@ -1,5 +1,5 @@
 
-const { Admin } = require('../../models/Admin');
+const { Admin } = require('../../models/index');
 const tokenController = require('../../reusable_module/tokenController');
 const { expiresInToMilliseconds } = require('../../reusable_module/utils');
 const bcrypt = require('bcryptjs');
@@ -37,7 +37,7 @@ const loginAdmin = async (req, res) => {
         // check if the admin is already logged in from another device
         if(admin.token != null) {
             try {
-                tokenController.verifyToken(admin.token,JWT_ADMIN_SECRET);
+                tokenController.verifyToken(admin.token,process.env.JWT_ACCESS_SECRET_ADMIN);
                 return res.status(401).json({type : 'multipleLogIn', msg: 'Already logged in from another device'});
             } catch(err) {
                 console.log();
@@ -48,7 +48,7 @@ const loginAdmin = async (req, res) => {
         const accessToken = await tokenController.genToken(
             { auth_id: admin.auth_id, email: admin.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
-            process.env.JWT_ADMIN_SECRET
+            process.env.JWT_ACCESS_SECRET_ADMIN
         );
         
         // Get the timestamp of the token expiration
@@ -58,7 +58,7 @@ const loginAdmin = async (req, res) => {
         const refreshToken = await tokenController.genToken(
             { auth_id: admin.auth_id, email: admin.email },
             process.env.JWT_REFRESH_EXPIRES_IN,
-            process.env.JWT_REFRESH_SECRET
+            process.env.JWT_REFRESH_SECRET_ADMIN
         );
         
         // Save refresh token to database
