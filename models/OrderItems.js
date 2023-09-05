@@ -30,11 +30,16 @@ const OrderItems = sequelize.define('OrderItems', {
     order_status: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'Pending',
     },
-    //handle viw invoice
-    view_invoice: {
+   
+    tracking_id: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+    },    
+    invoice: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
 }, {
     tableName: 'orderitems'

@@ -4,7 +4,7 @@ const Users = require('./Users');
 const BlockedToken = require('./BlockedToken');
 const Sellers = require('./Sellers');
 const Addresses = require('./Addresses');
-const CartItems = require('./CartItems');
+//const CartItems = require('./CartItems');
 const Categories = require('./Categories');
 const OrderItems = require('./OrderItems');
 const Orders = require('./Orders');
@@ -32,8 +32,8 @@ Addresses.belongsTo(Users, { foreignKey: 'auth_id' });
 
 
 //Association: Orders and OrderItems one to many
-Orders.hasMany(OrderItems, { foreignKey: 'order_id' });
-OrderItems.belongsTo(Orders, { foreignKey: 'order_id' });
+Orders.hasMany(OrderItems, { foreignKey: 'order_id', onDelete: 'CASCADE' });
+OrderItems.belongsTo(Orders, { foreignKey: 'order_id', onDelete: 'CASCADE' });
 
 
 //Association: Products and OrderItems one to many
@@ -52,4 +52,4 @@ Orders.belongsTo(Addresses, { foreignKey: 'address_id' });
 
 
 
-module.exports = { Auth,Admin, BlockedToken, Sellers, Addresses, CartItems, Categories, OrderItems, Orders, Products,Users };
+module.exports = { Auth,Admin, BlockedToken, Sellers, Addresses, Categories, OrderItems, Orders, Products,Users };

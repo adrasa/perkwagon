@@ -24,7 +24,7 @@ const allSellers = async (req, res) => {
 
         // });
 
-        res.status(200).json(sellers);
+        res.status(200).json({sellers});
     } catch (err) {
         // res.status(500).json({ msg: 'Internal Server Error' });
         return res.status(500).json(err.message);

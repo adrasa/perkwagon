@@ -8,4 +8,4 @@ const storage = new Storage({
 
 const bucketName = 'perkwagon';
 const bucket = storage.bucket(bucketName);
-module.exports = {bucket, bucketName};
+module.exports = { bucket, bucketName };

@@ -31,10 +31,15 @@ module.exports = {
       order_status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'Pending',
       },
-      view_invoice: {
+      tracking_id: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      invoice: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
