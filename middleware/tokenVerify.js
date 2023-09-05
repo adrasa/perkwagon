@@ -37,14 +37,25 @@ const tokenVerify = async (req, res, next) => {
             case "logoutAll":
                 secret = process.env.JWT_ACCESS_SECRET;
                 break;
+
             case "verifyUser":
                 secret = process.env.JWT_ACCESS_SECRET;
                 break;
+
+            case "verifyAdmin":
+                secret = process.env.JWT_ACCESS_SECRET_ADMIN;
+                break;
+
+            case "refreshAdminToken":
+                secret = process.env.JWT_REFRESH_SECRET_ADMIN;
+                break;
+
             default:
                 secret = process.env.JWT_SECRET;
                 break;
         }
 
+        
 
         if (!token) {
             return res.status(401).json({ type: 'tokenError', msg: 'No token provided' });

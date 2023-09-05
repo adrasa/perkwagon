@@ -24,7 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/', (req, res) => {
-    res.send('Welcome to the API');
+    res.send('Welcome to the PERKWAGON API!');
 });
 
 
