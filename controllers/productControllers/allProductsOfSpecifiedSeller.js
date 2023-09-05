@@ -1,4 +1,4 @@
-const {Products} = require('../../models/index');
+const {Products, Categories} = require('../../models/index');
 const allProductsOfSpecifiedSeller = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the requested page, default to 1

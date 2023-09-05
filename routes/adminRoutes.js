@@ -16,6 +16,8 @@ const allSellers = require('../controllers/sellerControllers/allSellers');
 const deleteSeller = require('../controllers/sellerControllers/deleteSeller');
 const editSellerDetails = require('../controllers/sellerControllers/editSellerDetails');
 const dateFilteredSellers = require('../controllers/sellerControllers/dateFilteredSellers');
+const searchSellers=require('../controllers/sellerControllers/searchSellers');
+
 
 //productControllers
 const addProduct = require('../controllers/productControllers/addProduct');
@@ -26,6 +28,8 @@ const editProduct = require('../controllers/productControllers/editProduct');
 const addImage = require('../controllers/productControllers/addImage');
 const deleteImage = require('../controllers/productControllers/deleteImage');
 const dateFilteredProductsOfSpecifiedSeller = require('../controllers/productControllers/dateFilteredProductsOfSpecifiedSeller');
+const searchProductsOfSpecifiedSeller=require('../controllers/productControllers/searchProductsOfSpecifiedSeller');
+
 
 //orderControllers
 const allOrders = require('../controllers/orderControllers/allOrders');
@@ -61,6 +65,7 @@ router.get('/allSellers', tokenVerify,allSellers);
 router.delete('/deleteSeller/:seller_id', tokenVerify,deleteSeller);
 router.put('/updateUserDetails/:seller_id', tokenVerify,editSellerDetails);
 router.get('/dateFilteredSellers', tokenVerify,dateFilteredSellers);
+router.get('/searchSellers', tokenVerify,searchSellers);
 
 router.post('/addProduct', tokenVerify, upload.array('images'), addCategory, addProduct)
 router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
@@ -69,6 +74,7 @@ router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
 router.post('/addImage/:product_id', tokenVerify, upload.single('image'),addImage);
 router.put('/deleteImage/:product_id', tokenVerify, deleteImage);
 router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
+router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
 
 router.get('/allOrders', tokenVerify, allOrders);
 router.get('/dateFilteredOrders', tokenVerify, dateFilteredOrders);
