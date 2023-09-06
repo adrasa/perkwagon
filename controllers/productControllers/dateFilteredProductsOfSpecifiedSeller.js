@@ -1,4 +1,4 @@
-const { Products, Categories } = require('../../models/index');
+const { Products, Categories, SubCategories,ProductSpecifications } = require('../../models/index');
 const dateFilteredProductsOfSpecifiedSeller = async (req, res) => {
     try {
         const startDate = new Date(req.query.startDate); // Example: '2023-08-01'
@@ -14,10 +14,17 @@ const dateFilteredProductsOfSpecifiedSeller = async (req, res) => {
 
         const seller_id = req.params.seller_id;
         const products = await Products.findAll({
-            include:
-            {
-                model: Categories,
-            },
+            include: [
+                {
+                    model: SubCategories,
+                    include: {
+                        model: Categories,
+                    }
+                },
+                {
+                    model: ProductSpecifications,
+                }
+            ],
             
             offset,
             limit,

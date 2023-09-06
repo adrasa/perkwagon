@@ -9,7 +9,8 @@ const Categories = require('./Categories');
 const OrderItems = require('./OrderItems');
 const Orders = require('./Orders');
 const Products = require('./Products');
-
+const SubCategories=require('./SubCategories');
+const ProductSpecifications = require('./ProductSpecifications');
 
 // Association: Auth and Users one to one
 Auth.hasOne(Users, {foreignKey: 'auth_id'});
@@ -19,11 +20,6 @@ Users.belongsTo(Auth, {foreignKey: 'auth_id'});
 //Association: Sellers and Products one to many
 Sellers.hasMany(Products, { foreignKey: 'seller_id', onDelete: 'CASCADE'});
 Products.belongsTo(Sellers, { foreignKey: 'seller_id', onDelete: 'CASCADE' });
-
-
-//Association: Categories and Products one to many
-Categories.hasMany(Products, { foreignKey: 'category_id' });
-Products.belongsTo(Categories, { foreignKey: 'category_id' });
 
 
 //Association: Users and Addresses one to many
@@ -50,6 +46,16 @@ Orders.belongsTo(Users, { foreignKey: 'auth_id' });
 Addresses.hasMany(Orders, { foreignKey: 'address_id' });
 Orders.belongsTo(Addresses, { foreignKey: 'address_id' });
 
+//Association: SubCategories and Products one to many
+SubCategories.hasMany(Products, { foreignKey: 'subcategory_id' });
+Products.belongsTo(SubCategories, { foreignKey: 'subcategory_id' });
 
+//Association: Categories and SubCategories one to many
+Categories.hasMany(SubCategories, { foreignKey: 'category_id' });
+SubCategories.belongsTo(Categories, { foreignKey: 'category_id' });
 
-module.exports = { Auth,Admin, BlockedToken, Sellers, Addresses, Categories, OrderItems, Orders, Products,Users };
+//Association: Products and ProductSpecifications one to many
+Products.hasMany(ProductSpecifications, { foreignKey: 'product_id' });
+ProductSpecifications.belongsTo(Products, { foreignKey: 'product_id' });
+
+module.exports = { Auth,Admin, BlockedToken, Sellers, Addresses, Categories, SubCategories,OrderItems, Orders, Products,ProductSpecifications,Users };

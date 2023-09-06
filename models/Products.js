@@ -31,6 +31,22 @@ const Products = sequelize.define('Products', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    discount_for_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    price_for_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    discount_for_member: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    price_for_member: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     min_order: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -39,11 +55,7 @@ const Products = sequelize.define('Products', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    specification:{
-        type:DataTypes.JSON,
-        allowNull:false
-    },
-    category_id: { //foreign key
+    subcategory_id: { //foreign key
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -58,7 +70,7 @@ const Products = sequelize.define('Products', {
         defaultValue: false,
     },
     return_period: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER, 
         allowNull: false,
     },
     return_policy: {
@@ -81,6 +93,17 @@ const Products = sequelize.define('Products', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    sell_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+    is_featured: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+
 }, {
     tableName: 'products'
 });

@@ -32,6 +32,22 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      discount_for_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      price_for_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      discount_for_member: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      price_for_member: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       min_order: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -40,11 +56,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      specification: {
-        type: Sequelize.JSON,
-        allowNull: false,
-      },
-      category_id: {
+      subcategory_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -81,13 +93,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      sell_count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      is_featured: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,  
+        allowNull: false,
       },
     });
   },

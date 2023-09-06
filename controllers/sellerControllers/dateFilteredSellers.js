@@ -23,7 +23,7 @@ const dateFilteredSellers = async (req, res) => {
             limit,
             order: [['createdAt', 'DESC']],
         });
-
+        if(!sellers) return res.status(400).json({ msg: 'No sellers found' });
         res.status(200).json({sellers});
     } catch (err) {
         res.status(500).json({ msg: 'Internal Server Error' });
