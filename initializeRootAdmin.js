@@ -9,8 +9,8 @@ const initializeRootAdmin = async () => {
         // Get data from request body
         // Create a new user
         const admin = {
-            email: 'adrasa.developer@gmail.com',
-            password: 'admin123',
+            email: 'email ',
+            password: 'password',
             typeofuser: 'Admin',
             tokens: { tokens: [] },
             isRoot: true,
