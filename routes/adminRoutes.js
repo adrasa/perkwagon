@@ -9,6 +9,7 @@ const loginAdmin = require('../controllers/adminAuthControllers/loginAdmin');
 const registerAdmin = require('../controllers/adminAuthControllers/registerAdmin');
 const logoutAdmin = require('../controllers/adminAuthControllers/logoutAdmin');
 const tokenVerify = require('../middleware/tokenVerify');
+const emailVerification = require('../controllers/adminAuthControllers/emailVerification');
 
 //sellerControllers
 const addSellerDetails = require('../controllers/sellerControllers/addSellerDetails');
@@ -59,6 +60,8 @@ const loginValidationRules = [
 router.get('/logout', logoutAdmin);
 router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
+router.get('/verifyEmail', tokenVerify, emailVerification);
+
 
 router.post('/addSellerDetails',tokenVerify ,addSellerDetails);
 router.get('/allSellers', tokenVerify,allSellers);
