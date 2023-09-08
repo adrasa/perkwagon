@@ -19,7 +19,7 @@ const logoutAdmin = async (req, res) => {
         adminInDb.token = null;
 
 
-        await userInDb.save();
+        await adminInDb.save();
 
 
 
