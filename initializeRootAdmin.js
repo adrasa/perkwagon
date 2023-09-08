@@ -22,7 +22,7 @@ const initializeRootAdmin = async () => {
 
 
         //send confirmation email
-        const msg = await cnfEmail(adminUser);
+        const msg = await cnfEmail(adminUser, true);
         console.log(msg);
         console.log('Admin created successfully');
 
