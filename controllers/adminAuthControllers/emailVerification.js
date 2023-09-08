@@ -2,7 +2,7 @@
 const {BlockedToken,Admin} = require('../../models/index');
 require('dotenv/config');
 
-const verify = async (req, res) => {
+const emailVerification= async (req, res) => {
     try {
       
             //get data
@@ -30,4 +30,4 @@ const verify = async (req, res) => {
 
 }
 
-module.exports = verify;
+module.exports = emailVerification;
