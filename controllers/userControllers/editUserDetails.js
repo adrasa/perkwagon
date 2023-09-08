@@ -1,5 +1,5 @@
 const { Users, Auth } = require('../../models/index');
-const uploadImage = require('../../reusable_module/uploadImage');
+const uploadImage = require('../../reusable_module/uploadFile');
 const editUserDetails = async (req, res) => {
     try {
         const auth = await Auth.findOne({
@@ -18,7 +18,7 @@ const editUserDetails = async (req, res) => {
 
         if (req.file) {
             // Generate CDN URL for the uploaded image
-            updatedFields.profile_picture = await uploadImage(req.file.buffer, req.file.originalname );
+            updatedFields.profile_picture = await uploadImage(req.file.buffer, req.file.originalname);
         }
 
         if (full_name) {

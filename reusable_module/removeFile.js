@@ -1,8 +1,8 @@
 const {bucket, bucketName}=require('./cloudStorage');
 const path = require('path');
-const removeImage = async (imageURL) => {
-    const fileName = imageURL.split('/').pop();
+const removeFile = async (fileURL) => {
+    const fileName = fileURL.split('/').pop();
     const file = bucket.file(fileName);
     await file.delete();
 }   
-module.exports = removeImage;
+module.exports = removeFile;

@@ -27,25 +27,19 @@ const Products = sequelize.define('Products', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    price: {
+    product_rating: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
-    discount_for_user: {
+    total_rating: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
     },
-    price_for_user: {
+    total_reviews: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
-    discount_for_member: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    price_for_member: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        defaultValue: 0,
     },
     min_order: {
         type: DataTypes.INTEGER,

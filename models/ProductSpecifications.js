@@ -19,6 +19,26 @@ const ProductSpecifications = sequelize.define('ProductSpecifications', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    discount_for_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    price_for_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    discount_for_member: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    price_for_member: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     weight: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,

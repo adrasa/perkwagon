@@ -28,25 +28,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      price: {
+      product_rating: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
-      discount_for_user: {
+      total_rating: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
-      price_for_user: {
+      total_reviews: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      discount_for_member: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      price_for_member: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        defaultValue: 0,
       },
       min_order: {
         type: Sequelize.INTEGER,

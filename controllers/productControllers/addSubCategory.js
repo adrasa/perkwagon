@@ -4,8 +4,9 @@ const addSubCategories = async (req, res, next) => {
     try {
 
         let subcategory = await SubCategories.findOne({ where: { 
+                category_id: req.category.category_id,
                 subcategory_name: req.body.subcategory_name ,
-                category_id:req.category.category_id
+                
             } });
         if (!subcategory) {
             const newSubCategory = {

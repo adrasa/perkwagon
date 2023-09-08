@@ -68,16 +68,16 @@ router.post('/login', loginValidationRules, loginAdmin);
 router.post('/addSellerDetails',tokenVerify ,addSellerDetails);
 router.get('/allSellers', tokenVerify,allSellers);
 router.delete('/deleteSeller/:seller_id', tokenVerify,deleteSeller);
-router.put('/updateUserDetails/:seller_id', tokenVerify,editSellerDetails);
+router.put('/updateSellerDetails/:seller_id', tokenVerify,editSellerDetails);
 router.get('/dateFilteredSellers', tokenVerify,dateFilteredSellers);
 router.get('/searchSellers', tokenVerify,searchSellers);
 
 
-router.post('/addProduct', tokenVerify, upload.array('images'), tokenVerify,addCategory,addSubCategory, addProduct)
+router.post('/addProduct', tokenVerify, upload.array('productImages'), tokenVerify,addCategory,addSubCategory, addProduct)
 router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
 router.put('/editProduct/:product_id', tokenVerify, addCategory,addSubCategory, editProduct);
 router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
-router.post('/addImage/:product_id', tokenVerify, upload.single('image'),addImage);
+router.post('/addImage/:product_id', tokenVerify, upload.single('productImage'),addImage);
 router.put('/deleteImage/:product_id', tokenVerify, deleteImage);
 router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
 router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
@@ -94,7 +94,7 @@ router.delete('/deleteOrder/:order_id', tokenVerify, deleteOrder);
 router.put('/editOrder/:order_id', tokenVerify, editOrder);
 router.patch('/addTrackingId/:order_item_id', tokenVerify, addTrackingId);
 router.patch('/editTrackingId/:order_item_id', tokenVerify, editTrackingId);
-router.patch('/addInvoice/:order_item_id',tokenVerify,upload.single('image'), addInvoice);
-router.patch('/editInvoice/:order_item_id', tokenVerify, upload.single('image'), editInvoice);
+router.patch('/addInvoice/:order_item_id',tokenVerify,upload.single('invoiceImage'), addInvoice);
+router.patch('/editInvoice/:order_item_id', tokenVerify, upload.single('invoceImage'), editInvoice);
 
 module.exports = router;

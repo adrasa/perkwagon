@@ -20,6 +20,26 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      discount_for_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      price_for_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      discount_for_member: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      price_for_member: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       weight: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
@@ -43,12 +63,10 @@ module.exports = {
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       },
     });
   },
