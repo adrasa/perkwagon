@@ -51,6 +51,7 @@ const tokenVerify = async (req, res, next) => {
                 break;
             case "logoutAdmin":
                 secret = process.env.JWT_ACCESS_SECRET_ADMIN;
+                break;
             default:
                 secret = process.env.JWT_SECRET;
                 break;
