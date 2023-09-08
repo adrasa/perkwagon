@@ -28,9 +28,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      price: {
+      product_rating: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      total_rating: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
+      },
+      total_reviews: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       min_order: {
         type: Sequelize.INTEGER,
@@ -40,11 +50,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      specification: {
-        type: Sequelize.JSON,
-        allowNull: false,
-      },
-      category_id: {
+      subcategory_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -81,13 +87,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      sell_count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      is_featured: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,  
+        allowNull: false,
       },
     });
   },

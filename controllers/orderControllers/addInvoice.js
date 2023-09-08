@@ -1,8 +1,8 @@
 const { OrderItems } = require('../../models/index');
-const uploadImage = require('../../reusable_module/uploadImage');
+const uploadImage = require('../../reusable_module/uploadFile');
 const addInvoice = async (req, res) => {
     try {
-        const order_item_id  = req.params.order_item_id;
+        const order_item_id = req.params.order_item_id;
         let invoiceUrl = null;
         if (req.file) {
             // Generate CDN URL for the uploaded image

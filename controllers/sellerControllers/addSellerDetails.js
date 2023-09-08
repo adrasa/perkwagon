@@ -2,9 +2,9 @@ const { Sellers } = require('../../models/index');
 
 const addSellerDetails = async (req, res) => {
     try {
-        if (!req.body.seller_name || !req.body.phone_number || !req.body.business_name || !req.body.goverment_issued_id || !req.body.gstin || !req.body.business_phone_number || !req.body.business_whatsapp_number || !req.body.business_email || !req.body.business_address_information || !req.body.website) return res.status(400).json({ msg: 'Please provide all the fields' });
 
         const seller = {
+            admin_id: req.user.admin_id,
             seller_name: req.body.seller_name,
             phone_number: req.body.phone_number,
             business_name: req.body.business_name,
@@ -21,7 +21,7 @@ const addSellerDetails = async (req, res) => {
             terms_and_conditions: req.body.terms_and_conditions,
         }
         await Sellers.create(seller);
-        
+
         return res.status(200).json({ msg: 'Seller Details Added Successfully' });
 
     } catch (err) {

@@ -1,6 +1,6 @@
 const { Products, Categories, SubCategories, ProductSpecifications } = require('../../models/index');
-const {Op} = require('sequelize');
-const searchProductsOfSpecifiedSeller = async (req, res) => {
+const { Op } = require('sequelize');
+const searchProducts= async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the requested page, default to 1
         const pageSize = parseInt(req.query.pageSize) || 10; // Set the number of items per page, default to 10
@@ -24,8 +24,7 @@ const searchProductsOfSpecifiedSeller = async (req, res) => {
             offset,
             limit,
             order: [['createdAt', 'DESC']],
-            where: { 
-                seller_id,
+            where: {
                 [Op.or]: [
                     {
                         product_id: {
@@ -39,7 +38,7 @@ const searchProductsOfSpecifiedSeller = async (req, res) => {
                     },
                 ],
 
-             }
+            }
         });
         if (!products) return res.status(400).json({ msg: 'No products found' });
         return res.status(200).json({ products });
@@ -47,4 +46,4 @@ const searchProductsOfSpecifiedSeller = async (req, res) => {
         return res.status(500).json({ msg: "Internal Server Error" });
     }
 }
-module.exports = searchProductsOfSpecifiedSeller;   
+module.exports = searchProducts;   

@@ -6,7 +6,7 @@ const Sellers = sequelize.define('Sellers', {
         primaryKey: true,
         autoIncrement: true,
     },
-    auth_id: { //Foreign key
+    admin_id: { //Foreign key
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -34,7 +34,7 @@ const Sellers = sequelize.define('Sellers', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    business_whatapp_number:{
+    business_whatsapp_number:{
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -100,6 +100,7 @@ const Sellers = sequelize.define('Sellers', {
     business_status:{
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'active',
     },
 }, {
     tableName: 'sellers'

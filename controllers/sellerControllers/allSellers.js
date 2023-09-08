@@ -23,11 +23,11 @@ const allSellers = async (req, res) => {
         //     }
 
         // });
-
-        res.status(200).json({sellers});
+        if (!sellers || sellers.length === 0) return res.status(400).json({ msg: 'No sellers found' });
+        return res.status(200).json({ sellers });
     } catch (err) {
         // res.status(500).json({ msg: 'Internal Server Error' });
-        return res.status(500).json(err.message);
+        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 }
 module.exports = allSellers;

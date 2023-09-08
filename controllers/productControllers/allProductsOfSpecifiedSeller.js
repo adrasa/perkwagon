@@ -1,4 +1,4 @@
-const {Products, Categories} = require('../../models/index');
+const {Products, Categories, SubCategories, ProductSpecifications} = require('../../models/index');
 const allProductsOfSpecifiedSeller = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the requested page, default to 1
@@ -9,10 +9,17 @@ const allProductsOfSpecifiedSeller = async (req, res) => {
 
         const seller_id = req.params.seller_id;
         const products = await Products.findAll({ 
-            include:
-            {
-                model: Categories,
-            },
+            include: [
+                {
+                    model: SubCategories,
+                    include: {
+                        model: Categories,
+                    }
+                },
+                {
+                    model: ProductSpecifications,
+                }
+            ],
             offset,
             limit,
             order: [['createdAt', 'DESC']],

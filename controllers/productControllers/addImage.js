@@ -1,10 +1,10 @@
-const {Products} = require('../../models/index');
+const { Products } = require('../../models/index');
 
-const uploadImage = require('../../reusable_module/uploadImage');
+const uploadImage = require('../../reusable_module/uploadFile');
 
 const addImage = async (req, res) => {
     try {
-        const product_id  = req.params.product_id;
+        const product_id = req.params.product_id;
         const images = req.files;
         const product = await Products.findOne({ where: { product_id } });
         if (!product) return res.status(400).json({ msg: 'No product found' });

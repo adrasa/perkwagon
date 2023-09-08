@@ -22,9 +22,9 @@ const addOrder = require('../controllers/orderControllers/addOrder');
 const upload= require('../middleware/multerConfig');
 
 //Define routes
-router.post('/addUserDetails', tokenVerify,upload.single('image'), addUserDetails); //profile->fieldname in frontend
+router.post('/addUserDetails', tokenVerify,upload.single('profileImage'), addUserDetails); //profile->fieldname in frontend
 router.get('/getUserDetails', tokenVerify, getUserDetails);
-router.put('/updateUserDetails', tokenVerify, upload.single('image'), editUserDetails);
+router.put('/updateUserDetails', tokenVerify, upload.single('profileImage'), editUserDetails);
 router.get('/orders',tokenVerify, getOrders);
 router.get('/addresses', tokenVerify, getAddresses);
 router.put('/editAddress/:address_id', tokenVerify, editAddress);

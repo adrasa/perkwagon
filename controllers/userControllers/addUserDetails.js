@@ -1,5 +1,5 @@
 const { Users, Auth } = require('../../models/index');
-const uploadImage = require('../../reusable_module/uploadImage')
+const uploadImage = require('../../reusable_module/uploadFile')
 const addUserDetails = async (req, res) => {
     try {
         const auth = Auth.findOne({
@@ -12,7 +12,7 @@ const addUserDetails = async (req, res) => {
         let imageUrl = null;
         if (req.file) {
             // Generate CDN URL for the uploaded image
-            imageUrl =await uploadImage(req.file.buffer, req.file.originalname);
+            imageUrl = await uploadImage(req.file.buffer, req.file.originalname);
         }
         const newUser = {
             auth_id: req.user.auth_id,
