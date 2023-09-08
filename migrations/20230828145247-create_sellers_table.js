@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      auth_id: {
+      admin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      business_whatapp_number: {
+      business_whatsapp_number: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -74,7 +74,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      total_order_received: {
+      total_order_recieved: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0,

@@ -65,7 +65,7 @@ router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
 
 
-router.post('/addSellerDetails',addSellerDetails);
+router.post('/addSellerDetails',tokenVerify ,addSellerDetails);
 router.get('/allSellers', tokenVerify,allSellers);
 router.delete('/deleteSeller/:seller_id', tokenVerify,deleteSeller);
 router.put('/updateSellerDetails/:seller_id', tokenVerify,editSellerDetails);

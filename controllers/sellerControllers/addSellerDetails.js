@@ -2,8 +2,9 @@ const { Sellers } = require('../../models/index');
 
 const addSellerDetails = async (req, res) => {
     try {
-     
+
         const seller = {
+            admin_id: req.admin.admin_id,
             seller_name: req.body.seller_name,
             phone_number: req.body.phone_number,
             business_name: req.body.business_name,
@@ -20,11 +21,11 @@ const addSellerDetails = async (req, res) => {
             terms_and_conditions: req.body.terms_and_conditions,
         }
         await Sellers.create(seller);
-        
+
         return res.status(200).json({ msg: 'Seller Details Added Successfully' });
 
     } catch (err) {
-        return res.status(500).json({ msg: err.message });
+        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 }
 module.exports = addSellerDetails;
