@@ -4,7 +4,7 @@ const addSellerDetails = async (req, res) => {
     try {
 
         const seller = {
-            admin_id: req.admin.admin_id,
+            admin_id: req.user.admin_id,
             seller_name: req.body.seller_name,
             phone_number: req.body.phone_number,
             business_name: req.body.business_name,
