@@ -21,7 +21,7 @@ const allSellers = require('../controllers/sellerControllers/allSellers');
 const deleteSeller = require('../controllers/sellerControllers/deleteSeller');
 const editSellerDetails = require('../controllers/sellerControllers/editSellerDetails');
 const dateFilteredSellers = require('../controllers/sellerControllers/dateFilteredSellers');
-const searchSellers=require('../controllers/sellerControllers/searchSellers');
+const searchSellers = require('../controllers/sellerControllers/searchSellers');
 
 
 //productControllers
@@ -34,11 +34,11 @@ const editProduct = require('../controllers/productControllers/editProduct');
 const addImage = require('../controllers/productControllers/addImage');
 const deleteImage = require('../controllers/productControllers/deleteImage');
 const dateFilteredProductsOfSpecifiedSeller = require('../controllers/productControllers/dateFilteredProductsOfSpecifiedSeller');
-const searchProductsOfSpecifiedSeller=require('../controllers/productControllers/searchProductsOfSpecifiedSeller');
-const dateFilteredProducts=require('../controllers/productControllers/dateFilteredProducts');
-const searchProducts=require('../controllers/productControllers/searchProducts');
-const featuredProducts=require('../controllers/productControllers/featuredProducts');
-const maxSoldProducts=require('../controllers/productControllers/maxSoldProducts');
+const searchProductsOfSpecifiedSeller = require('../controllers/productControllers/searchProductsOfSpecifiedSeller');
+const dateFilteredProducts = require('../controllers/productControllers/dateFilteredProducts');
+const searchProducts = require('../controllers/productControllers/searchProducts');
+const featuredProducts = require('../controllers/productControllers/featuredProducts');
+const maxSoldProducts = require('../controllers/productControllers/maxSoldProducts');
 
 //orderControllers
 const allOrders = require('../controllers/orderControllers/allOrders');
@@ -47,7 +47,7 @@ const deleteOrder = require('../controllers/orderControllers/deleteOrder');
 const editOrder = require('../controllers/orderControllers/editOrder');
 const addTrackingId = require('../controllers/orderControllers/addTrackingId');
 const editTrackingId = require('../controllers/orderControllers/editTrackingId');
-const addInvoice= require('../controllers/orderControllers/addInvoice');
+const addInvoice = require('../controllers/orderControllers/addInvoice');
 const editInvoice = require('../controllers/orderControllers/editInvoice');
 
 
@@ -68,7 +68,7 @@ const updatePasswordRules = [
 ];
 
 
-router.get('/logout', logoutAdmin);
+router.get('/logout', tokenVerify, logoutAdmin);
 router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
 router.get('/verifyEmail', tokenVerify, emailVerification);
@@ -81,19 +81,19 @@ router.post('/resendEmail', resendEmail);
 
 
 
-router.post('/addSellerDetails',tokenVerify ,addSellerDetails);
-router.get('/allSellers', tokenVerify,allSellers);
-router.delete('/deleteSeller/:seller_id', tokenVerify,deleteSeller);
-router.put('/updateSellerDetails/:seller_id', tokenVerify,editSellerDetails);
-router.get('/dateFilteredSellers', tokenVerify,dateFilteredSellers);
-router.get('/searchSellers', tokenVerify,searchSellers);
+router.post('/addSellerDetails', tokenVerify, addSellerDetails);
+router.get('/allSellers', tokenVerify, allSellers);
+router.delete('/deleteSeller/:seller_id', tokenVerify, deleteSeller);
+router.put('/updateSellerDetails/:seller_id', tokenVerify, editSellerDetails);
+router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
+router.get('/searchSellers', tokenVerify, searchSellers);
 
 
-router.post('/addProduct', tokenVerify, upload.array('productImages'), tokenVerify,addCategory,addSubCategory, addProduct)
+router.post('/addProduct', tokenVerify, upload.array('productImages'), tokenVerify, addCategory, addSubCategory, addProduct)
 router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
-router.put('/editProduct/:product_id', tokenVerify, addCategory,addSubCategory, editProduct);
+router.put('/editProduct/:product_id', tokenVerify, addCategory, addSubCategory, editProduct);
 router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
-router.post('/addImage/:product_id', tokenVerify, upload.single('productImage'),addImage);
+router.post('/addImage/:product_id', tokenVerify, upload.single('productImage'), addImage);
 router.put('/deleteImage/:product_id', tokenVerify, deleteImage);
 router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
 router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
@@ -110,7 +110,7 @@ router.delete('/deleteOrder/:order_id', tokenVerify, deleteOrder);
 router.put('/editOrder/:order_id', tokenVerify, editOrder);
 router.patch('/addTrackingId/:order_item_id', tokenVerify, addTrackingId);
 router.patch('/editTrackingId/:order_item_id', tokenVerify, editTrackingId);
-router.patch('/addInvoice/:order_item_id',tokenVerify,upload.single('invoiceImage'), addInvoice);
+router.patch('/addInvoice/:order_item_id', tokenVerify, upload.single('invoiceImage'), addInvoice);
 router.patch('/editInvoice/:order_item_id', tokenVerify, upload.single('invoceImage'), editInvoice);
 
 module.exports = router;
