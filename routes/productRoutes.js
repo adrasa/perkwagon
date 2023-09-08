@@ -6,3 +6,5 @@ const getCategories = require('../controllers/productControllers/getCategories')
 
 router.get('/allProducts', allProducts);
 router.get('/getCategories', getCategories);
+
+module.exports = router;
