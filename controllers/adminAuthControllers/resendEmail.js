@@ -7,7 +7,7 @@ const resendEmail = async (req, res) => {
         const { email } = req.body;
 
         // Check if user exists
-        const user = await Auth.findOne({ where: { email } });
+        const user = await Admin.findOne({ where: { email } });
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
