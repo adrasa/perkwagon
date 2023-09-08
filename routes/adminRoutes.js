@@ -13,6 +13,7 @@ const emailVerification = require('../controllers/adminAuthControllers/emailVeri
 const forgetPassword = require('../controllers/adminAuthControllers/forgetPassword');
 const refreshToken = require('../controllers/adminAuthControllers/refreshToken');
 const updatePassword = require('../controllers/adminAuthControllers/updatePassword');
+const resendEmail = require('../controllers/adminAuthControllers/resendEmail');
 
 //sellerControllers
 const addSellerDetails = require('../controllers/sellerControllers/addSellerDetails');
