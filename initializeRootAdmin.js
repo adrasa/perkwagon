@@ -1,4 +1,4 @@
-const { Auth } = require('./models/index');
+const { Admin } = require('./models/index');
 const bcrypt = require('bcryptjs');
 const cnfEmail = require('./emailService/confirmEmailResolver');
 require('dotenv/config');
@@ -9,15 +9,16 @@ const initializeRootAdmin = async () => {
         // Get data from request body
         // Create a new user
         const admin = {
-            email: 'email id of rootadmin',
-            password: 'password',
+            email: 'adrasa.developer@gmail.com',
+            password: 'admin123',
             typeofuser: 'Admin',
             tokens: { tokens: [] },
+            isRoot: true,
         }
         // Hash the password
         admin.password = await bcrypt.hash(admin.password, 10);
 
-        const adminUser = await Auth.create(admin);
+        const adminUser = await Admin.create(admin);
 
 
         //send confirmation email

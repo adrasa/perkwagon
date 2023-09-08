@@ -14,7 +14,7 @@ const tokenVerify = async (req, res, next) => {
         // get the purpose of the token verification
         const purpose = req.headers.purpose;
 
-        
+
 
         let secret;
         switch (purpose) {
@@ -43,23 +43,24 @@ const tokenVerify = async (req, res, next) => {
                 break;
 
             case "verifyAdmin":
-                secret = process.env.JWT_ACCESS_SECRET_ADMIN;
+                secret = process.env.JWT_SECRET;
                 break;
 
             case "refreshAdminToken":
                 secret = process.env.JWT_REFRESH_SECRET_ADMIN;
                 break;
-
+            case "logoutAdmin":
+                secret = process.env.JWT_ACCESS_SECRET_ADMIN;
             default:
                 secret = process.env.JWT_SECRET;
                 break;
         }
 
-        
+
 
         if (!token) {
             return res.status(401).json({ type: 'tokenError', msg: 'No token provided' });
-            
+
         }
         //check token is valid or not
         const invalidToken = await BlockedToken.findOne({ where: { token: token } });
@@ -74,11 +75,11 @@ const tokenVerify = async (req, res, next) => {
         } catch (error) {
             return res.status(401).json({ type: 'invalidToken', msg: 'Invalid/Expired link' });
         }
-   
+
         //set user in req
         req.user = decoded;
         req.token = token;
-        
+
 
         //next middleware
         next()
