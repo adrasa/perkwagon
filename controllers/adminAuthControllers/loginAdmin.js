@@ -46,7 +46,7 @@ const loginAdmin = async (req, res) => {
 
         //Get Access Token
         const accessToken = await tokenController.genToken(
-            { auth_id: admin.auth_id, email: admin.email },
+            { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
             process.env.JWT_ACCESS_SECRET_ADMIN
         );
@@ -56,7 +56,7 @@ const loginAdmin = async (req, res) => {
 
         //Get Refresh Token
         const refreshToken = await tokenController.genToken(
-            { auth_id: admin.auth_id, email: admin.email },
+            { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_REFRESH_EXPIRES_IN,
             process.env.JWT_REFRESH_SECRET_ADMIN
         );

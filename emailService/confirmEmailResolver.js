@@ -1,16 +1,26 @@
 const tokenController = require("../reusable_module/tokenController");
 const sendEmail = require("./sendMail");
-const confirmEmailResolver = async (user) => {
+const confirmEmailResolver = async (user, isAdmin=false) => {
     return new Promise(async (resolve, reject) => {
         // if the user email is not confirmed
         if (!user.verified) {
             try {
-                // generate the token for confirmation email valid for 30m
-                const token = await tokenController.genToken(
-                    { auth_id: user.auth_id, email: user.email },
-                    process.env.JWT_VERIFY_EXPIRES_IN,
-                    process.env.JWT_SECRET
-                );
+                let token;
+                if(!isAdmin) {
+                    // generate the token for confirmation email valid for 30m
+                    token = await tokenController.genToken(
+                        { auth_id: user.auth_id, email: user.email },
+                        process.env.JWT_VERIFY_EXPIRES_IN,
+                        process.env.JWT_SECRET
+                    );
+                } else {
+                    token = await tokenController.genToken(
+                        { admin_id: user.admin_id, email: user.email },
+                        process.env.JWT_VERIFY_EXPIRES_IN,
+                        process.env.JWT_SECRET
+                    );
+                }
+                
 
                 // const url = `${process.env.HOST}/auth/verifyEmail/${token}`;
                 const url = `${process.env.HOST}/auth/verifyEmail/${token}`;

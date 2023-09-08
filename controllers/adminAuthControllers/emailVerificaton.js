@@ -11,13 +11,13 @@ const verify = async (req, res) => {
             //update the verify status in database
             await Admin.update({ verified: true }, {
                 where: {
-                    auth_id: user.auth_id
+                    admin_id: user.admin_id
                 }
             });
 
             
             // put the token into blocked token table
-            await BlockedToken.create({ token: token, tokenExpiry: Date.now()+user.exp });
+            await BlockedToken.create({ token: token, tokenExpiry: Date.now() + user.exp });
             
             //send response
             res.status(200).json({ msg: 'Successfully verified' });

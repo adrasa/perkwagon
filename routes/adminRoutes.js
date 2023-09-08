@@ -10,6 +10,9 @@ const registerAdmin = require('../controllers/adminAuthControllers/registerAdmin
 const logoutAdmin = require('../controllers/adminAuthControllers/logoutAdmin');
 const tokenVerify = require('../middleware/tokenVerify');
 const emailVerification = require('../controllers/adminAuthControllers/emailVerification');
+const forgetPassword = require('../controllers/adminAuthControllers/forgetPassword');
+const refreshToken = require('../controllers/adminAuthControllers/refreshToken');
+const updatePassword = require('../controllers/adminAuthControllers/updatePassword');
 
 //sellerControllers
 const addSellerDetails = require('../controllers/sellerControllers/addSellerDetails');
@@ -59,12 +62,21 @@ const loginValidationRules = [
     check('email').isEmail().withMessage('Invalid email address'),
 ];
 
+const updatePasswordRules = [
+    check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+];
 
 
 router.get('/logout', logoutAdmin);
 router.post('/register', registerValidationRules, registerAdmin);
 router.post('/login', loginValidationRules, loginAdmin);
 router.get('/verifyEmail', tokenVerify, emailVerification);
+router.get('/refreshtoken', refreshToken);
+router.post('/forgetPassword', loginValidationRules, forgetPassword);
+router.patch('/resetPassword', tokenVerify, updatePasswordRules, updatePassword);
+router.post('/resendEmail', resendEmail);
+
+
 
 
 

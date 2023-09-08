@@ -29,7 +29,7 @@ const registerAdmin = async (req, res) => {
 
         
         //send confirmation email
-        const msg = await cnfEmail(user);
+        const msg = await cnfEmail(user,true);
         console.log(msg);
 
 
