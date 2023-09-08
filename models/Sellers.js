@@ -100,6 +100,7 @@ const Sellers = sequelize.define('Sellers', {
     business_status:{
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'active',
     },
 }, {
     tableName: 'sellers'

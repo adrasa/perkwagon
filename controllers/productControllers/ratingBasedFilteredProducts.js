@@ -1,28 +1,18 @@
 const {Products, ProductSpecifications}=require('../../models/index');
 const {Op}=require('sequelize');
-const priceBasedFilteredProducts=async(req,res)=>{
+const ratingBasedFilteredProducts=async(req,res)=>{
     try{
-        const {minPrice,maxPrice}=req.query;
-        const productIds=await ProductSpecifications.findAll({
-            where:{
-                price:{
-                    [Op.between]:[minPrice,maxPrice]
-                }
-            },
-            attributes:['product_id'],
-            
-        });
-
+        const {ratings}=req.query; //getarray of ratings
         const products=await Products.findAll({
             where:{
-                product_id:{
-                    [Op.in]:productIds.map((product)=> {return product.product_id})
+                product_rating:{
+                    [Op.in]:ratings,
                 }
             },
             include:{
                 model:ProductSpecifications,
             }
-        }); 
+        });
         if(!products){
             return res.status(404).json({msg:"No products found"});
         }
@@ -31,4 +21,4 @@ const priceBasedFilteredProducts=async(req,res)=>{
         return res.status(500).json({msg:"Internal Server Error"});
     }
 };
-module.exports = priceBasedFilteredProducts;
+module.exports = ratingBasedFilteredProducts;

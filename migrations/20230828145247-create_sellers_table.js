@@ -102,6 +102,7 @@ module.exports = {
       business_status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'active',
       },
       createdAt: {
         type: Sequelize.DATE,

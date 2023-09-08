@@ -1,18 +1,12 @@
-const {Products, ProductSpecifications}=require('../../models/index');
+const {Products, ProductSpecifications}=require('../../models/index');  
 const {Op}=require('sequelize');
-const priceBasedFilteredProducts=async(req,res)=>{
-    try{
-        const {minPrice,maxPrice}=req.query;
+const priceBasedSortedProducts=async(req,res)=>{
+    try {
+        const {sort}=req.query; //take sort as 'DESC' or 'ASC'
         const productIds=await ProductSpecifications.findAll({
-            where:{
-                price:{
-                    [Op.between]:[minPrice,maxPrice]
-                }
-            },
             attributes:['product_id'],
-            
+            order:[['price',sort]]
         });
-
         const products=await Products.findAll({
             where:{
                 product_id:{
@@ -27,8 +21,8 @@ const priceBasedFilteredProducts=async(req,res)=>{
             return res.status(404).json({msg:"No products found"});
         }
         return res.status(200).json({products});
-    }catch(err){
-        return res.status(500).json({msg:"Internal Server Error"});
+    } catch (error) {
+        
     }
 };
-module.exports = priceBasedFilteredProducts;
+module.exports = priceBasedSortedProducts;
