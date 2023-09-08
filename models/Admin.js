@@ -11,28 +11,26 @@ const Admin = sequelize.define('Admin', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-            isEmail: true,
-        },
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    verified:{
+    verified: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
     },
-    token:{
+    token: {
         type: DataTypes.TEXT,
         allowNull: true,
     },
     isRoot: {
         type: DataTypes.BOOLEAN,
-        allowNull: true       
+        allowNull: false,
+        defaultValue: false,
     }
-},{
+}, {
     tableName: 'admin'
 });
 

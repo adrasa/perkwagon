@@ -12,7 +12,7 @@ const initializeRootAdmin = async () => {
             email: 'email id of rootadmin',
             password: 'password',
             typeofuser: 'Admin',
-            tokens: { tokens: [] }
+            tokens: { tokens: [] },
         }
         // Hash the password
         admin.password = await bcrypt.hash(admin.password, 10);
