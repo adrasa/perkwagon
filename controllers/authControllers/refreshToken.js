@@ -36,11 +36,11 @@ const refreshToken = async (req, res) => {
         const tokenExpiration = new Date(Date.now() + expiresInToMilliseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
 
         //send response
-        res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration, admin: false });
+        return res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration, isAdmin: false });
 
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
 

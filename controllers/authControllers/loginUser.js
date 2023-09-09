@@ -68,7 +68,11 @@ const loginUser = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none'
+<<<<<<< HEAD
         }).status(200).json({ msg: 'Login successful', typeofuser: user.typeofuser, accessToken, tokenExpiration, isAdmin: false });
+=======
+        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration ,isAdmin:false});
+>>>>>>> refs/remotes/origin/main
         
 
 

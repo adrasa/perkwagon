@@ -11,6 +11,7 @@ module.exports = {
       full_name: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'Perkwagoner',
       },
       phone_number: {
         type: Sequelize.STRING,
@@ -27,11 +28,11 @@ module.exports = {
       },
       city: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       state: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       total_orders: {
         type: Sequelize.INTEGER,

@@ -10,6 +10,7 @@ const Users = sequelize.define('Users', {
     full_name: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'Perkwagoner',
     },
     phone_number: {
         type: DataTypes.STRING,
@@ -26,11 +27,11 @@ const Users = sequelize.define('Users', {
     },
     city: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     state: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     total_orders: {
         type: DataTypes.INTEGER,

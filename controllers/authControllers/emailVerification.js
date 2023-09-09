@@ -1,5 +1,5 @@
 
-const {BlockedToken,Auth} = require('../../models/index');
+const {BlockedToken,Auth, Users} = require('../../models/index');
 require('dotenv/config');
 
 const verify = async (req, res) => {
@@ -15,7 +15,9 @@ const verify = async (req, res) => {
                 }
             });
 
-            
+            await Users.create({
+                auth_id:user.auth_id,
+            })
             // put the token into blocked token table
             await BlockedToken.create({ token: token, tokenExpiry: Date.now()+user.exp });
             
