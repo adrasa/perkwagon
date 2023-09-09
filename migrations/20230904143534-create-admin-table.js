@@ -31,7 +31,8 @@ module.exports = {
       },
       isRoot: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
