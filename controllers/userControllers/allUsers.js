@@ -12,6 +12,7 @@ const allUsers = async (req, res) => {
             limit,
             order: [['createdAt', 'DESC']],
         });
+        if(!users || users.length===0) return res.status(400).json({ msg: 'No users found' });
         return res.status(200).json({ users });
     } catch (err) {
         return res.status(500).json({ msg: 'Internal Server Error' });
