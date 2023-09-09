@@ -17,6 +17,7 @@ const verify = async (req, res) => {
 
             await Users.create({
                 auth_id:user.auth_id,
+                email:user.email,
             })
             // put the token into blocked token table
             await BlockedToken.create({ token: token, tokenExpiry: Date.now()+user.exp });

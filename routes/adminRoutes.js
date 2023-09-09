@@ -51,6 +51,12 @@ const addInvoice = require('../controllers/orderControllers/addInvoice');
 const editInvoice = require('../controllers/orderControllers/editInvoice');
 
 
+//user controllers
+const allUsers = require('../controllers/userControllers/allUsers');
+const dateFilteredUsers = require('../controllers/userControllers/dateFilteredUsers');
+const memberFilteredUsers= require('../controllers/userControllers/memberFilteredUsers');
+const searchUsers = require('../controllers/userControllers/searchUsers');
+
 const router = express.Router();
 
 
@@ -112,5 +118,16 @@ router.patch('/addTrackingId/:order_item_id', tokenVerify, addTrackingId);
 router.patch('/editTrackingId/:order_item_id', tokenVerify, editTrackingId);
 router.patch('/addInvoice/:order_item_id', tokenVerify, upload.single('invoiceImage'), addInvoice);
 router.patch('/editInvoice/:order_item_id', tokenVerify, upload.single('invoceImage'), editInvoice);
+
+
+
+
+router.get('/allUsers', tokenVerify, allUsers);
+router.get('/dateFilteredUsers', tokenVerify, dateFilteredUsers);
+router.get('/memberFilteredUsers', tokenVerify, memberFilteredUsers);
+router.get('/searchUsers', tokenVerify, searchUsers);
+
+
+
 
 module.exports = router;

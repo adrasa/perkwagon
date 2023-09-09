@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false,
         defaultValue: 'Perkwagoner',
       },
+      email:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       phone_number: {
         type: Sequelize.STRING,
         allowNull: true,

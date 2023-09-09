@@ -43,7 +43,7 @@ const tokenVerify = async (req, res, next) => {
                 break;
 
             case "verifyAdmin":
-                secret = process.env.JWT_SECRET;
+                secret = process.env.JWT_ACCESS_SECRET_ADMIN;
                 break;
 
             case "refreshAdminToken":
