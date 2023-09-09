@@ -68,7 +68,7 @@ const loginUser = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none'
-        }).status(200).json({ msg: 'Login successful', typeofuser: user.typeofuser, accessToken, tokenExpiration });
+        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration ,isAdmin:false});
         
 
 
