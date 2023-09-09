@@ -75,7 +75,7 @@ const loginAdmin = async (req, res) => {
             sameSite: 'none'
 
         })
-        req.status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
+        res.status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
 
 
 
