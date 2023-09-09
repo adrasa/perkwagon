@@ -12,7 +12,9 @@ const Products = require('./Products');
 const SubCategories=require('./SubCategories');
 const ProductSpecifications = require('./ProductSpecifications');
 const Reviews = require('./Reviews');
-const Cart = require('./UserCart');
+const Cart = require('./Cart');
+const CartItems = require('./CartItems');
+
 
 // Association: Auth and Users one to one
 Auth.hasOne(Users, {foreignKey: 'auth_id'});
