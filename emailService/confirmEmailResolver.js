@@ -6,6 +6,7 @@ const confirmEmailResolver = async (user, isAdmin=false) => {
         if (!user.verified) {
             try {
                 let token;
+                let url;
                 if(!isAdmin) {
                     // generate the token for confirmation email valid for 30m
                     token = await tokenController.genToken(
@@ -13,17 +14,19 @@ const confirmEmailResolver = async (user, isAdmin=false) => {
                         process.env.JWT_VERIFY_EXPIRES_IN,
                         process.env.JWT_SECRET
                     );
+                    url = `${process.env.HOST}/auth/verifyEmail/${token}`;
                 } else {
                     token = await tokenController.genToken(
                         { admin_id: user.admin_id, email: user.email },
                         process.env.JWT_VERIFY_EXPIRES_IN,
                         process.env.JWT_SECRET
                     );
+                    url = `${process.env.HOST}/admin/verifyEmail/${token}`;
                 }
                 
 
                 // const url = `${process.env.HOST}/auth/verifyEmail/${token}`;
-                const url = `${process.env.HOST}/auth/verifyEmail/${token}`;
+                
                 // send the mail to the user
                 mailInfo = {
                     to: user.email,

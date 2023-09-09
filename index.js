@@ -10,11 +10,13 @@ const productRoutes=require('./routes/productRoutes');
 const deleteExpiredTokens = require('./scheduled_tasks/deleteExpiredTokens');
 const cookieParser = require('cookie-parser');
 
+
 const corsOptions = {
     origin: 'https://perkwagon-test.netlify.app', // allow all origins
 
     credentials: true
 };
+
 
 app.use(express.json());
 app.use(cors(corsOptions));

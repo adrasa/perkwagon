@@ -1,5 +1,5 @@
 
-const { Admin } = require('../../models/index');
+const { Admin, BlockedToken } = require('../../models/index');
 const tokenController = require('../../reusable_module/tokenController');
 const { expiresInToMilliseconds } = require('../../reusable_module/utils');
 const bcrypt = require('bcryptjs');
@@ -35,10 +35,11 @@ const loginAdmin = async (req, res) => {
         }
 
         // check if the admin is already logged in from another device
-        if(admin.token != null) {
+        if(admin.token != null) { 
             try {
-                tokenController.verifyToken(admin.token,process.env.JWT_ACCESS_SECRET_ADMIN);
-                return res.status(401).json({type : 'multipleLogIn', msg: 'Already logged in from another device'});
+                const user = await tokenController.verifyToken(admin.token,process.env.JWT_ACCESS_SECRET_ADMIN);
+                // put the token in the blocklist
+                await BlockedToken.create({ token: admin.token, tokenExpiry: Date.now() + user.exp });
             } catch(err) {
                 console.log();
             }
@@ -58,7 +59,7 @@ const loginAdmin = async (req, res) => {
         const refreshToken = await tokenController.genToken(
             { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_REFRESH_EXPIRES_IN,
-            process.env.JWT_REFRESH_SECRET_ADMIN
+            process.env.JWT_REFRESH_SECRET
         );
         
         // Save refresh token to database

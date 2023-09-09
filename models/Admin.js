@@ -30,7 +30,8 @@ const Admin = sequelize.define('Admin', {
     },
     isRoot: {
         type: DataTypes.BOOLEAN,
-        allowNull: true       
+        allowNull: false,
+        defaultValue: false       
     }
 },{
     tableName: 'admin'
