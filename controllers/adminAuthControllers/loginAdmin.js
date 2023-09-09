@@ -73,11 +73,12 @@ const loginAdmin = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none'
-<<<<<<< HEAD
-        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
-=======
-        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration , isAdmin:true});
->>>>>>> refs/remotes/origin/main
+
+        })
+        req.status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
+
+
+
         
 
 
