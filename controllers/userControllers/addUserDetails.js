@@ -9,6 +9,7 @@ const addUserDetails = async (req, res) => {
         if (!auth) {
             return res.status(404).json({ msg: 'User not found' });
         }
+      
         let imageUrl = null;
         if (req.file) {
             // Generate CDN URL for the uploaded image
@@ -30,7 +31,7 @@ const addUserDetails = async (req, res) => {
         return res.status(201).json({ msg: 'User details added successfully', user });
     } catch (err) {
 
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg:'Internal Server Error'});
     }
 }
 module.exports = addUserDetails;
