@@ -36,7 +36,7 @@ const refreshToken = async (req, res) => {
         const tokenExpiration = new Date(Date.now() + expiresInToMilliseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
 
         //send response
-        res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration });
+        res.json({ msg: 'Refresh access token generated', accessToken, tokenExpiration, admin: true });
 
     } catch (err) {
         console.log(err.message);
