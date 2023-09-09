@@ -9,17 +9,28 @@ const searchUsers=async(req,res)=>{
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
         const users = await Users.findAll({
-            attributes: ['auth_id','full_name','phone_number','city','state','createdAt'],
+            attributes: ['auth_id','full_name','email','phone_number','city','state','createdAt'],
             offset,
             limit,
             order: [['createdAt', 'DESC']],
             where: {
-                full_name: {
-                    [Op.like]: `${search}%`,
-                },
+                [Op.or]: [
+                    {
+                        auth_id: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product ID
+                        },
+
+                    },
+                    {
+                        email: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product ID
+                        },
+                    },
+                ]
             },
             collate: 'utf8mb4_general_ci',// Add the COLLATE clause for case-insensitive matching
         });
+        if(!users || users.length===0) return res.status(400).json({ msg: 'No users found' });
         return res.status(200).json({ users });
     }catch(err){
         return res.status(500).json({ msg: 'Internal Server Error' });
