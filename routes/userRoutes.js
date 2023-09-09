@@ -4,7 +4,6 @@ const router = express.Router();
 const tokenVerify = require('../middleware/tokenVerify');
 
 //userControllers
-const addUserDetails = require('../controllers/userControllers/addUserDetails');
 const getUserDetails = require('../controllers/userControllers/getUserDetails');
 const editUserDetails = require('../controllers/userControllers/editUserDetails');
 const getOrders = require('../controllers/userControllers/getOrders');
@@ -19,13 +18,12 @@ const addOrder = require('../controllers/orderControllers/addOrder');
 
 
 
-const upload= require('../middleware/multerConfig');
+const upload = require('../middleware/multerConfig');
 
 //Define routes
-router.post('/addUserDetails', tokenVerify,upload.single('profileImage'), addUserDetails); //profile->fieldname in frontend
 router.get('/getUserDetails', tokenVerify, getUserDetails);
 router.put('/updateUserDetails', tokenVerify, upload.single('profileImage'), editUserDetails);
-router.get('/orders',tokenVerify, getOrders);
+router.get('/orders', tokenVerify, getOrders);
 router.get('/addresses', tokenVerify, getAddresses);
 router.put('/editAddress/:address_id', tokenVerify, editAddress);
 router.post('/addAddress', tokenVerify, addAddresses);
