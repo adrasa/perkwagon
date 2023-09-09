@@ -18,8 +18,17 @@ const deleteAddress = require('../controllers/userControllers/deleteAddress');
 const addOrder = require('../controllers/orderControllers/addOrder');
 
 
+// cart controllers
+const getCart = require('../controllers/cartControllers/getCart');
+const addToCart = require('../controllers/cartControllers/addToCart');
+const removeFromCart = require('../controllers/cartControllers/removeFromCart');
+const emptyCart = require('../controllers/cartControllers/emptyCart');
+const changeQuantity = require('../controllers/cartControllers/changeQuantity');
+
+
 
 const upload= require('../middleware/multerConfig');
+const changeQuantity = require('../controllers/cartControllers/changeQuantity');
 
 //Define routes
 router.post('/addUserDetails', tokenVerify,upload.single('profileImage'), addUserDetails); //profile->fieldname in frontend
@@ -37,5 +46,12 @@ router.delete('/deleteAddress/:address_id', tokenVerify, deleteAddress);
 router.post('/addOrder', tokenVerify, addOrder);
 
 
+
+// cart routes
+router.get('/getCart', tokenVerify, getCart);
+router.post('/addToCart', tokenVerify, addToCart);
+router.post('/removeFromCart', tokenVerify, removeFromCart);
+router.post('/emptyCart', tokenVerify, emptyCart);
+router.post('/changeQuantity', tokenVerify, changeQuantity);
 
 module.exports = router;

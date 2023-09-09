@@ -1,3 +1,5 @@
+const ProductSpecifications = require('../models').ProductSpecifications;
+
 
 const expiresInToMilliseconds = (expiresIn) => {
     const unit = expiresIn.charAt(expiresIn.length - 1);
@@ -11,4 +13,20 @@ const expiresInToMilliseconds = (expiresIn) => {
     return 0;
 };
 
-module.exports = { expiresInToMilliseconds };
+// function to calculate the subtotal of the item
+const calculateSubtotal = async (product_id, specification_id, quantity, isMember) => {
+    let subtotal = 0;
+    // get the product specification from the database
+    const productSpecification = await ProductSpecifications.findOne({ where: { product_id: product_id, specification_id: specification_id } });
+
+    if (isMember) {
+        subtotal = productSpecification.price_for_member * quantity;
+    } else {
+        subtotal = productSpecification.price_for_user * quantity;
+    }
+
+    return subtotal;
+};
+
+
+module.exports = { expiresInToMilliseconds, calculateSubtotal};
