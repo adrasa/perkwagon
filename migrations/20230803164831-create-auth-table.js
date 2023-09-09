@@ -20,10 +20,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      typeofuser: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       verified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
