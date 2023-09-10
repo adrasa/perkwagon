@@ -80,13 +80,18 @@ const loginAdmin = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none'
-        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration , isAdmin:true});
+
+        })
+        return res.status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
+
+
+
         
 
 
     } catch (err) {
         console.log(err);
-        res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 }
 
