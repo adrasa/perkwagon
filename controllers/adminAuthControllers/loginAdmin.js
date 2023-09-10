@@ -34,6 +34,13 @@ const loginAdmin = async (req, res) => {
             return res.status(401).json({ type:'invalid', msg: 'Invalid credentials' });
         }
 
+        // check if the cookie is present in the blocked token list
+        const blockedToken = await BlockedToken.findOne({ where: { token: req.cookie.refreshToken } });
+        if (blockedToken) {
+            res.clearCookie('refreshToken');
+        }
+
+
         // check if the admin is already logged in from another device
         if(admin.token != null) { 
             try {
@@ -73,11 +80,7 @@ const loginAdmin = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none'
-<<<<<<< HEAD
-        }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration, isAdmin: true });
-=======
         }).status(200).json({ msg: 'Login successful', accessToken, tokenExpiration , isAdmin:true});
->>>>>>> refs/remotes/origin/main
         
 
 
