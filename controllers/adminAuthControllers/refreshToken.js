@@ -15,7 +15,7 @@ const refreshToken = async (req, res) => {
         let user;
         // Verify the refresh token
         try {
-            user = await tokenController.verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
+            user = await tokenController.verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET_ADMIN);
         } catch (err) {
             // clear the cookie in the frontend
             await res.clearCookie('refreshToken',{
@@ -29,7 +29,7 @@ const refreshToken = async (req, res) => {
         const accessToken = await tokenController.genToken(
             { admin_id: user.admin_id, email: user.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
-            process.env.JWT_ACCESS_SECRET
+            process.env.JWT_ACCESS_SECRET_ADMIN
         );
 
         // Get the timestamp of the token expiration
