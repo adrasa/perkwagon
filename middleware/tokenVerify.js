@@ -56,7 +56,8 @@ const tokenVerify = async (req, res, next) => {
                 secret = process.env.JWT_SECRET;
                 break;
         }
-
+                
+        console.log(secret);
 
 
         if (!token) {
@@ -86,6 +87,7 @@ const tokenVerify = async (req, res, next) => {
         next()
     } catch (error) {
         //set error in req
+        console.log(error.message);
         return res.status(500).json({ msg: 'Internal Server Error' });
     }
 };
