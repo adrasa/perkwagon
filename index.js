@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 
 const corsOptions = {
     origin: 'https://perkwagon-test.netlify.app', // allow all origins
+    // origin: 'http://localhost:3000',
 
     credentials: true
 };
