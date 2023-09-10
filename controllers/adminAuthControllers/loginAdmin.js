@@ -31,23 +31,31 @@ const loginAdmin = async (req, res) => {
         // Check if password is correct
         const isPasswordMatch = await bcrypt.compare(password, admin.password);
         if (!isPasswordMatch) {
-            return res.status(401).json({ type:'invalid', msg: 'Invalid credentials' });
+            return res.status(401).json({ type: 'invalid', msg: 'Invalid credentials' });
         }
 
-        // check if the cookie is present in the blocked token list
-        const blockedToken = await BlockedToken.findOne({ where: { token: req.cookie.refreshToken } });
-        if (blockedToken) {
-            res.clearCookie('refreshToken');
+
+        const cookie = await req.cookies.refreshToken;
+        if (cookie) {
+            // check if the cookie is present in the blocked token list
+            const blockedToken = await BlockedToken.findOne({ where: { token: cookie} });
+            if (blockedToken) {
+                await res.clearCookie('refreshToken', {
+                    sameSite: "none",
+                    secure: true,
+                });
+            }
         }
 
+        
 
         // check if the admin is already logged in from another device
-        if(admin.token != null) { 
+        if (admin.token != null) {
             try {
-                const user = await tokenController.verifyToken(admin.token,process.env.JWT_ACCESS_SECRET_ADMIN);
+                const user = await tokenController.verifyToken(admin.token, process.env.JWT_ACCESS_SECRET_ADMIN);
                 // put the token in the blocklist
                 await BlockedToken.create({ token: admin.token, tokenExpiry: Date.now() + user.exp });
-            } catch(err) {
+            } catch (err) {
                 console.log();
             }
         }
@@ -56,9 +64,9 @@ const loginAdmin = async (req, res) => {
         const accessToken = await tokenController.genToken(
             { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
-            process.env.JWT_ACCESS_SECRET_ADMIN
+            process.env.JWT_ACCESS_SECRET
         );
-        
+
         // Get the timestamp of the token expiration
         const tokenExpiration = new Date(Date.now() + expiresInToMilliseconds(process.env.JWT_ACCESS_EXPIRES_IN)).toISOString();
 
@@ -68,11 +76,11 @@ const loginAdmin = async (req, res) => {
             process.env.JWT_REFRESH_EXPIRES_IN,
             process.env.JWT_REFRESH_SECRET
         );
-        
+
         // Save refresh token to database
-        admin.token = refreshToken; 
+        admin.token = refreshToken;
         await admin.save();
-        
+
 
         // store refresh token into the cookie
         await res.cookie('refreshToken', refreshToken, {
@@ -86,7 +94,7 @@ const loginAdmin = async (req, res) => {
 
 
 
-        
+
 
 
     } catch (err) {

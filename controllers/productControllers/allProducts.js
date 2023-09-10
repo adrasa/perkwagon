@@ -21,7 +21,6 @@ const allProducts = async (req, res) => {
                     model: ProductSpecifications,
                 }
             ],
-            
             offset,
             limit,
             order: [['createdAt', 'DESC']],

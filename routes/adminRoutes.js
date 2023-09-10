@@ -95,7 +95,7 @@ router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
 
-router.post('/addProduct', upload.array('productImages'), tokenVerify, addCategory, addSubCategory, addProduct)
+router.post('/addProduct', upload.array('productImages'), addCategory, addSubCategory, addProduct)
 router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
 router.put('/editProduct/:product_id', tokenVerify, addCategory, addSubCategory, editProduct);
 router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
