@@ -64,7 +64,7 @@ const loginAdmin = async (req, res) => {
         const accessToken = await tokenController.genToken(
             { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_ACCESS_EXPIRES_IN,
-            process.env.JWT_ACCESS_SECRET
+            process.env.JWT_ACCESS_SECRET_ADMIN
         );
 
         // Get the timestamp of the token expiration
@@ -74,7 +74,7 @@ const loginAdmin = async (req, res) => {
         const refreshToken = await tokenController.genToken(
             { admin_id: admin.admin_id, email: admin.email },
             process.env.JWT_REFRESH_EXPIRES_IN,
-            process.env.JWT_REFRESH_SECRET
+            process.env.JWT_REFRESH_SECRET_ADMIN
         );
 
         // Save refresh token to database
