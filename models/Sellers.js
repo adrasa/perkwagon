@@ -26,27 +26,47 @@ const Sellers = sequelize.define('Sellers', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    gstin:{
+    gstin: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    business_phone_number:{
+    business_phone_number: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    business_whatsapp_number:{
+    business_whatsapp_number: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    business_email:{
+    business_email: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    business_address_information:{ //adrees line 1, address line 2, city, state, pincode, country
-        type: DataTypes.JSON,
+    business_address_line_1: { //adrees line 1, address line 2, city, state, pincode, country
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    website:{
+    business_address_line_2: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    business_address_city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    business_address_state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    business_address_pincode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    business_address_landmark: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    website: {
         type: DataTypes.STRING,
         allowNull: true,
     },
@@ -67,37 +87,37 @@ const Sellers = sequelize.define('Sellers', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    total_products_listed:{
+    total_products_listed: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    total_order_recieved:{
+    total_order_recieved: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    total_order_amount:{
+    total_order_amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    total_order_cancelled:{
+    total_order_cancelled: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    total_products_returned:{
+    total_products_returned: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    total_returned_amount:{
+    total_returned_amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    business_status:{
+    business_status: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'active',

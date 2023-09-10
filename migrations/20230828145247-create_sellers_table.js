@@ -44,8 +44,28 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      business_address_information: {
-        type: Sequelize.JSON,
+      business_address_line_1: { //adrees line 1, address line 2, city, state, pincode, country
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      business_address_line_2: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      business_address_city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      business_address_state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      business_address_pincode: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      business_address_landmark: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       website: {
