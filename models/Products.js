@@ -75,14 +75,31 @@ const Products = sequelize.define('Products', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    manufacturer_information: { //Manufacturer name, Contact number, Email, customer supprot number
-        type: DataTypes.JSON,
+    manufacturer_name: { //Manufacturer name, Contact number, Email, customer supprot number
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    manufacturer_contact_number: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    manufacturer_email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    customer_support_number: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     payment_method: {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    used_material: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    
     seller_id: { //foreign key
         type: DataTypes.INTEGER,
         allowNull: false,

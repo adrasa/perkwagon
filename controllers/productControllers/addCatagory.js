@@ -20,7 +20,7 @@ const addCategories = async (req, res, next) => {
         req.category = category;
         next();
     } catch (err) {
-        return res.status(500).json({ msg: 'Internal Server error' });
+        return res.status(500).json({ msg: err.message });
     }
 };
 

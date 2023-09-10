@@ -75,11 +75,27 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      manufacturer_information: {
-        type: Sequelize.JSON,
+      manufacturer_name: { //Manufacturer name, Contact number, Email, customer supprot number
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      manufacturer_contact_number: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      manufacturer_email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      customer_support_number: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       payment_method: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      used_material: {
         type: Sequelize.STRING,
         allowNull: false,
       },

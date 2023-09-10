@@ -19,7 +19,7 @@ const addSubCategories = async (req, res, next) => {
         req.subcategory = subcategory;
         next();
     } catch (err) {
-        return res.status(500).json({ msg: 'Internal Server error' });
+        return res.status(500).json({ msg: err.message });
     }
 };
 

@@ -29,7 +29,10 @@ const addProduct = async (req, res) => {
             return_period: req.body.return_period,
             return_policy: req.body.return_policy,
             safety_information: req.body.safety_information,
-            manufacturer: req.body.manufacturer,
+            manufacturer_name:req.body.manufacturer_name,
+            manufacturer_email:req.body.manufacturer_email,
+            manufacturer_contact_number:req.body.manufacturer_contact_number,
+            customer_support_number:req.body.customer_support_number,
             payment_method: req.body.payment_method,
             used_material: req.body.used_material,
             images: { imageUrls },
@@ -59,7 +62,7 @@ const addProduct = async (req, res) => {
 
         return res.status(201).json({ msg: "Product added successfully" })
     } catch (err) {
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: err.message});
     }
 };
 
