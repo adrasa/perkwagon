@@ -11,6 +11,11 @@ module.exports = {
       product_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'products',
+          key: 'product_id',
+        },
+        onDelete: 'CASCADE',
       },
       size: {
         type: Sequelize.STRING,

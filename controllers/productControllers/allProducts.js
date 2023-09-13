@@ -25,7 +25,7 @@ const allProducts = async (req, res) => {
             limit,
             order: [['createdAt', 'DESC']],
         });
-        if(!products) return res.status(400).json({ msg: 'No products found' });
+        if(!products || products.length===0) return res.status(400).json({ msg: 'No products found' });
         return res.status(200).json({ products });
 
     } catch (error) {

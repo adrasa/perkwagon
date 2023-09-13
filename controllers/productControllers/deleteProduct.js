@@ -14,7 +14,7 @@ const deleteProduct = async (req, res) => {
         return res.status(200).json({ msg: 'Product deleted successfully' });
 
     } catch (err) {
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: err.message});
     }
 }
 module.exports = deleteProduct;

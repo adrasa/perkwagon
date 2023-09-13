@@ -4,10 +4,8 @@ const addCategories = async (req, res, next) => {
     try {
        
         
-        if (!req.files) {
-            return res.status(400).json({type:"image", msg: "Please upload an image" });
-        }
-        
+       
+        console.log(req.body);
         
         let category = await Categories.findOne({ where: { category_name: req.body.category_name } });
         if (!category) {
@@ -20,7 +18,7 @@ const addCategories = async (req, res, next) => {
         req.category = category;
         next();
     } catch (err) {
-        return res.status(500).json({ msg: err.message });
+        return res.status(500).json({ msg: err.message});
     }
 };
 

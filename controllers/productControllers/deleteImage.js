@@ -12,7 +12,7 @@ const deleteImages = async (req, res) => {
         await Products.update({ images: { imageUrls } }, { where: { product_id } });
         return res.status(200).json({ msg: 'Images deleted successfully' });
     } catch (err) {
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: err.message });
     }
 }
 module.exports = deleteImages;

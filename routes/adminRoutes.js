@@ -95,18 +95,18 @@ router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
 
-router.post('/addProduct', upload.array('productImages'), addCategory, addSubCategory, addProduct)
-router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
-router.put('/editProduct/:product_id', tokenVerify, addCategory, addSubCategory, editProduct);
+router.post('/addProduct', tokenVerify, upload.array('productImages'), addCategory, addSubCategory, addProduct)
+router.get('/allProductsOfSpecifiedSeller/:seller_id',tokenVerify, allProductsOfSpecifiedSeller);
+router.put('/editProduct/:product_id',tokenVerify, upload.array('productImages'), addCategory, addSubCategory, editProduct);
 router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
-router.post('/addImage/:product_id', tokenVerify, upload.single('productImage'), addImage);
-router.put('/deleteImage/:product_id', tokenVerify, deleteImage);
-router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
-router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
-router.get('/dateFilteredProducts', tokenVerify, dateFilteredProducts);
-router.get('/searchProducts', tokenVerify, searchProducts);
-router.get('/featuredProducts', tokenVerify, featuredProducts);
-router.get('/maxSoldProducts', tokenVerify, maxSoldProducts);
+router.post('/addImage/:product_id',tokenVerify, upload.single('productImage'), addImage);
+router.patch('/deleteImage/:product_id',tokenVerify, deleteImage);
+router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id',tokenVerify, dateFilteredProductsOfSpecifiedSeller)
+router.get('/searchProductsOfSpecifiedSeller/:seller_id',tokenVerify,  searchProductsOfSpecifiedSeller);
+router.get('/dateFilteredProducts',tokenVerify, dateFilteredProducts);
+router.get('/searchProducts',tokenVerify,searchProducts);
+router.get('/featuredProducts',tokenVerify, featuredProducts);
+router.get('/maxSoldProducts',tokenVerify,maxSoldProducts);
 
 
 

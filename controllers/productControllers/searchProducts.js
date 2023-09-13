@@ -8,7 +8,7 @@ const searchProducts= async (req, res) => {
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
 
-        const seller_id = req.params.seller_id;
+       
         const products = await Products.findAll({
             include: [
                 {
@@ -28,22 +28,22 @@ const searchProducts= async (req, res) => {
                 [Op.or]: [
                     {
                         product_id: {
-                            [Op.iLike]: `${req.query.product_id}%`, // Case-insensitive, initial match for product ID
+                            [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product ID
                         },
                     },
                     {
                         name: {
-                            [Op.iLike]: `${req.query.name}%`, // Case-insensitive, initial match for product name
+                            [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product name
                         },
                     },
                 ],
-
-            }
+            },
+            collate: 'utf8mb4_general_ci',
         });
-        if (!products) return res.status(400).json({ msg: 'No products found' });
+        if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
         return res.status(200).json({ products });
     } catch (err) {
-        return res.status(500).json({ msg: "Internal Server Error" });
+        return res.status(500).json({ msg:err.message });
     }
 }
 module.exports = searchProducts;   

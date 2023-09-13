@@ -10,6 +10,12 @@ const ProductSpecifications = sequelize.define('ProductSpecifications', {
     product_id: { // Foreign key referencing the Product table
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'products',
+            key: 'product_id',
+        },
+        onDelete: 'CASCADE',
+
     },
     size: {
         type: DataTypes.STRING,

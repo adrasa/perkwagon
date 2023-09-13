@@ -1,4 +1,5 @@
 const { Products, Categories, SubCategories, ProductSpecifications } = require('../../models/index');
+const {Op}=require('sequelize');
 const dateFilteredProducts= async (req, res) => {
     try {
         const startDate = new Date(req.query.startDate); // Example: '2023-08-01'
@@ -34,10 +35,10 @@ const dateFilteredProducts= async (req, res) => {
                 },
             },
         });
-        if (!products) return res.status(400).json({ msg: 'No products found' });
+        if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
         return res.status(200).json({ products });
     } catch (err) {
-        return res.status(500).json({ msg: "Internal Server Error" });
+        return res.status(500).json({ msg: err.message });
     }
 }
 module.exports = dateFilteredProducts;

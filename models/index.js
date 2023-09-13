@@ -59,8 +59,8 @@ Categories.hasMany(SubCategories, { foreignKey: 'category_id' });
 SubCategories.belongsTo(Categories, { foreignKey: 'category_id' });
 
 //Association: Products and ProductSpecifications one to many
-Products.hasMany(ProductSpecifications, { foreignKey: 'product_id' });
-ProductSpecifications.belongsTo(Products, { foreignKey: 'product_id' });
+//Products.hasMany(ProductSpecifications, { foreignKey: 'product_id' , onDelete: 'CASCADE'});
+//ProductSpecifications.belongsTo(Products, { foreignKey: 'product_id', onDelete: 'CASCADE' });
 
 
 //Association: Products and Reviews one to many
