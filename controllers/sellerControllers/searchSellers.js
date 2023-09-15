@@ -8,6 +8,32 @@ const allSellers = async (req, res) => {
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
         const search=req.query.search;
+        const sellerCount=await Sellers.count({
+            where: {
+                [Op.or]: [
+                    {
+                        seller_id: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product ID
+                        },
+                    },
+                    {
+                        seller_name: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product name
+                        },
+                    },
+                    {
+                        business_name: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product name
+                        },
+                    },
+                    {
+                        business_email: {
+                            [Op.like]: `${search}%`, // Case-insensitive, initial match for product name
+                        },
+                    }
+                ],
+            },
+        })
         let sellers = await Sellers.findAll({
             offset,
             limit,
@@ -39,7 +65,7 @@ const allSellers = async (req, res) => {
             collate: 'utf8mb4_general_ci',// Add the COLLATE clause for case-insensitive matching
         });
         if (!sellers || sellers.length === 0) return res.status(400).json({ msg: 'No sellers found' });
-        return res.status(200).json({ sellers });
+        return res.status(200).json({ data:{sellers, sellerCount} });
     } catch (err) {
         return res.status(500).json({ msg: 'Internal Server Error' });
        

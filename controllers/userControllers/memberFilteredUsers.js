@@ -7,6 +7,11 @@ const memberFilteredUsers = async (req, res) => {
 
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
+        const userCount=await Users.count({
+            where: {
+                membership_status: member,
+            }
+        })
         const users = await Users.findAll({
             attributes: ['auth_id', 'full_name', 'phone_number', 'city', 'state', 'createdAt'],
             offset,
@@ -16,7 +21,7 @@ const memberFilteredUsers = async (req, res) => {
                 membership_status: member,
             }
         });
-        return res.status(200).json({ users });
+        return res.status(200).json({ data:{users,userCount} });
     } catch (err) {
         return res.status(500).json({ msg: 'Internal Server Error' });
     }

@@ -14,6 +14,14 @@ const dateFilteredProductsOfSpecifiedSeller = async (req, res) => {
         const limit = pageSize;
 
         const seller_id = req.params.seller_id;
+        const productCount = await Products.count({
+            where: {
+                seller_id: seller_id,
+                createdAt: {
+                    [Op.between]: [startDate, endDate],
+                },
+            },
+        });
         const products = await Products.findAll({
             include: [
                 {
@@ -38,7 +46,7 @@ const dateFilteredProductsOfSpecifiedSeller = async (req, res) => {
             },
         });
         if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
-        return res.status(200).json({ products });
+        return res.status(200).json({data:{ products, productCount} });
     } catch (err) {
         return res.status(500).json({ msg: err.message });
     }

@@ -12,7 +12,13 @@ const dateFilteredSellers = async (req, res) => {
 
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
-
+        const sellerCount=await Sellers.count({
+            where: {
+                createdAt: {
+                    [Op.between]: [startDate, endDate],
+                },
+            },
+        })
         const sellers = await Sellers.findAll({
             where: {
                 createdAt: {
@@ -24,7 +30,7 @@ const dateFilteredSellers = async (req, res) => {
             order: [['createdAt', 'DESC']],
         });
         if (!sellers || sellers.length === 0) return res.status(400).json({ msg: 'No sellers found' });
-        return res.status(200).json({ sellers });
+        return res.status(200).json({ data:{sellers, sellerCount} });
     } catch (err) {
         return res.status(500).json({ msg: 'Internal Server Error' });
     }

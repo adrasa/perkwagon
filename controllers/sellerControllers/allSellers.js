@@ -7,7 +7,7 @@ const allSellers = async (req, res) => {
 
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
-
+        const sellerCount=await Sellers.count();
         let sellers = await Sellers.findAll({
             offset,
             limit,
@@ -24,7 +24,7 @@ const allSellers = async (req, res) => {
 
         // });
         if (!sellers || sellers.length === 0) return res.status(400).json({ msg: 'No sellers found' });
-        return res.status(200).json({ sellers });
+        return res.status(200).json({ data:{sellers, sellerCount} });
     } catch (err) {
         // res.status(500).json({ msg: 'Internal Server Error' });
         return res.status(500).json({ msg: 'Internal Server Error' });

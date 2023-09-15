@@ -12,7 +12,7 @@ const priceBasedFilteredProducts=async(req,res)=>{
             attributes:['product_id'],
             
         });
-
+        const productCount=productIds.length;
         const products=await Products.findAll({
             where:{
                 product_id:{
@@ -26,7 +26,7 @@ const priceBasedFilteredProducts=async(req,res)=>{
         if(!products){
             return res.status(404).json({msg:"No products found"});
         }
-        return res.status(200).json({products});
+        return res.status(200).json({data:{products, productCount}});
     }catch(err){
         return res.status(500).json({msg:"Internal Server Error"});
     }

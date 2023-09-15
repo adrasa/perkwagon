@@ -8,7 +8,22 @@ const searchProducts= async (req, res) => {
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
 
-       
+       const productCount=await Products.count({
+           where: {
+               [Op.or]: [
+                   {
+                       product_id: {
+                           [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product ID
+                       },
+                   },
+                   {
+                       name: {
+                           [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product name
+                       },
+                   },
+               ],
+           },
+       })
         const products = await Products.findAll({
             include: [
                 {
@@ -41,7 +56,7 @@ const searchProducts= async (req, res) => {
             collate: 'utf8mb4_general_ci',
         });
         if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
-        return res.status(200).json({ products });
+        return res.status(200).json({data:{ products, productCount} });
     } catch (err) {
         return res.status(500).json({ msg:err.message });
     }

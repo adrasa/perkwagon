@@ -9,6 +9,25 @@ const searchProductsOfSpecifiedSeller = async (req, res) => {
         const limit = pageSize;
 
         const seller_id = req.params.seller_id;
+        const productCount=await Products.count({
+            where: {
+                seller_id,
+                [Op.or]: [
+                    {
+                        product_id: {
+                            [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product ID
+                        },
+                    },
+                    {
+                        name: {
+                            [Op.like]: `${req.query.search}%`, // Case-insensitive, initial match for product name
+                        },
+                    },
+                ],
+
+            },
+
+        })
         const products = await Products.findAll({
             include: [
                 {
@@ -43,7 +62,7 @@ const searchProductsOfSpecifiedSeller = async (req, res) => {
             collate: 'utf8mb4_general_ci',
         });
         if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
-        return res.status(200).json({ products });
+        return res.status(200).json({ data:{products, productCount} });
     } catch (err) {
         return res.status(500).json({ msg: err.message});
     }

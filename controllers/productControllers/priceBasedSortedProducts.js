@@ -7,6 +7,7 @@ const priceBasedSortedProducts=async(req,res)=>{
             attributes:['product_id'],
             order:[['price',sort]]
         });
+        const productCount=productIds.length;
         const products=await Products.findAll({
             where:{
                 product_id:{
@@ -20,7 +21,7 @@ const priceBasedSortedProducts=async(req,res)=>{
         if(!products){
             return res.status(404).json({msg:"No products found"});
         }
-        return res.status(200).json({products});
+        return res.status(200).json({data:{products, productCount}});
     } catch (error) {
         
     }

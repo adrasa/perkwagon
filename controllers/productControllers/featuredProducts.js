@@ -8,7 +8,7 @@ const featuredProducts = async (req, res) => {
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
 
-
+        const productCount = await Products.count({ where: { is_featured: true } });
         const products = await Products.findAll({
             include: [
                 {
@@ -26,7 +26,7 @@ const featuredProducts = async (req, res) => {
         },
         { where: { is_featured: true } });
         if (!products || products.length === 0) return res.status(400).json({ msg: 'No products found' });
-        return res.status(200).json({ products });
+        return res.status(200).json({ data:{products, productCount }});
 
     } catch (error) {
         return res.status(500).json({ msg: 'Internal Server Error' });
