@@ -100,8 +100,8 @@ router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
 
-router.post('/addCategory', tokenVerify, upload.single('categoryImage'),addCategory);
-router.post('/addSubCategory', tokenVerify,upload.single('subcategoryImage'), addSubcategory);
+router.post('/addCategory', tokenVerify, upload.single('categoryImage'), addCategory);
+router.post('/addSubCategory', tokenVerify, upload.single('subcategoryImage'), addSubcategory);
 router.delete('/deleteCategory/:category_id', tokenVerify, deleteCategory);
 router.delete('/deleteSubCategory/:subcategory_id', tokenVerify, deleteSubcategory);
 router.post('/addProduct', tokenVerify, upload.array('productImages'), addProduct)
