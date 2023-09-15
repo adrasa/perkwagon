@@ -38,9 +38,9 @@ const searchProducts = require('../controllers/productControllers/searchProducts
 const featuredProducts = require('../controllers/productControllers/featuredProducts');
 const maxSoldProducts = require('../controllers/productControllers/maxSoldProducts');
 const addCategory = require('../controllers/productControllers/addCatagory');
-const addSubCategory = require('../controllers/productControllers/addSubCategory');
+const addSubcategory = require('../controllers/productControllers/addSubCategory');
 const deleteCategory = require('../controllers/productControllers/deleteCategory');
-const deleteSubCategory = require('../controllers/productControllers/deleteSubCategory');
+const deleteSubcategory = require('../controllers/productControllers/deleteSubCategory');
 
 
 
@@ -101,9 +101,9 @@ router.get('/searchSellers', tokenVerify, searchSellers);
 
 
 router.post('/addCategory', tokenVerify, upload.single('categoryImage'),addCategory);
-router.post('/addSubCategory', tokenVerify,upload.single('subcategoryImage'), addSubCategory);
+router.post('/addSubCategory', tokenVerify,upload.single('subcategoryImage'), addSubcategory);
 router.delete('/deleteCategory/:category_id', tokenVerify, deleteCategory);
-router.delete('/deleteSubCategory/:subcategory_id', tokenVerify, deleteSubCategory);
+router.delete('/deleteSubCategory/:subcategory_id', tokenVerify, deleteSubcategory);
 router.post('/addProduct', tokenVerify, upload.array('productImages'), addProduct)
 router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
 router.put('/editProduct/:product_id', tokenVerify, upload.array('productImages'), editProduct);
