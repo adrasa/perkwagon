@@ -42,7 +42,7 @@ const addSubcategory = require('../controllers/productControllers/addSubCategory
 const deleteCategory = require('../controllers/productControllers/deleteCategory');
 const deleteSubcategory = require('../controllers/productControllers/deleteSubCategory');
 const getCategories = require('../controllers/productControllers/getCategories');
-
+const allProducts = require('../controllers/productControllers/allProducts');
 
 
 //orderControllers
@@ -99,7 +99,7 @@ router.put('/updateSellerDetails/:seller_id', tokenVerify, editSellerDetails);
 router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
-router.get('/getCategories', tokenVerify, getCategories);
+router.get('/getCategories', getCategories);
 router.post('/addCategory', tokenVerify, upload.single('categoryImage'), addCategory);
 router.post('/addSubCategory', tokenVerify, upload.single('subcategoryImage'), addSubcategory);
 router.delete('/deleteCategory/:category_id', tokenVerify, deleteCategory);
@@ -113,10 +113,10 @@ router.patch('/deleteImage/:product_id', tokenVerify, deleteImage);
 router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
 router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
 router.get('/dateFilteredProducts', tokenVerify, dateFilteredProducts);
-router.get('/searchProducts', tokenVerify, searchProducts);
+router.get('/searchProducts',searchProducts);
 router.get('/featuredProducts', tokenVerify, featuredProducts);
 router.get('/maxSoldProducts', tokenVerify, maxSoldProducts);
-
+router.get('/allProducts', allProducts);
 
 
 router.get('/allOrders', tokenVerify, allOrders);
