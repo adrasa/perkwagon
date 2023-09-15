@@ -41,7 +41,7 @@ const addCategory = require('../controllers/productControllers/addCatagory');
 const addSubcategory = require('../controllers/productControllers/addSubCategory');
 const deleteCategory = require('../controllers/productControllers/deleteCategory');
 const deleteSubcategory = require('../controllers/productControllers/deleteSubCategory');
-
+const getCategories = require('../controllers/productControllers/getCategories');
 
 
 
@@ -99,7 +99,7 @@ router.put('/updateSellerDetails/:seller_id', tokenVerify, editSellerDetails);
 router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
-
+router.get('/getCategories', tokenVerify, getCategories);
 router.post('/addCategory', tokenVerify, upload.single('categoryImage'), addCategory);
 router.post('/addSubCategory', tokenVerify, upload.single('subcategoryImage'), addSubcategory);
 router.delete('/deleteCategory/:category_id', tokenVerify, deleteCategory);
