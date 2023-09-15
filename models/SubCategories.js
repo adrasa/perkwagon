@@ -11,9 +11,18 @@ const SubCategories = sequelize.define('SubCategories', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    subcategory_image:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'categories',
+            key: 'category_id'
+        },
+        onDelete: 'CASCADE',
     }
     
 }, {

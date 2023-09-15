@@ -52,6 +52,11 @@ const Products = sequelize.define('Products', {
     subcategory_id: { //foreign key
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'subcategories',
+            key: 'subcategory_id',
+        },
+        onDelete: 'CASCADE',
     },
     
     warranty_information: { //warranty period, garranty, warranty policy

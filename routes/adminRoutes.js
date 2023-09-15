@@ -26,8 +26,6 @@ const searchSellers = require('../controllers/sellerControllers/searchSellers');
 
 //productControllers
 const addProduct = require('../controllers/productControllers/addProduct');
-const addCategory = require('../controllers/productControllers/addCatagory');
-const addSubCategory = require('../controllers/productControllers/addSubCategory');
 const allProductsOfSpecifiedSeller = require('../controllers/productControllers/allProductsOfSpecifiedSeller');
 const deleteProduct = require('../controllers/productControllers/deleteProduct');
 const editProduct = require('../controllers/productControllers/editProduct');
@@ -39,6 +37,13 @@ const dateFilteredProducts = require('../controllers/productControllers/dateFilt
 const searchProducts = require('../controllers/productControllers/searchProducts');
 const featuredProducts = require('../controllers/productControllers/featuredProducts');
 const maxSoldProducts = require('../controllers/productControllers/maxSoldProducts');
+const addCategory = require('../controllers/productControllers/addCatagory');
+const addSubCategory = require('../controllers/productControllers/addSubCategory');
+const deleteCategory = require('../controllers/productControllers/deleteCategory');
+const deleteSubCategory = require('../controllers/productControllers/deleteSubCategory');
+
+
+
 
 //orderControllers
 const allOrders = require('../controllers/orderControllers/allOrders');
@@ -54,7 +59,7 @@ const editInvoice = require('../controllers/orderControllers/editInvoice');
 //user controllers
 const allUsers = require('../controllers/userControllers/allUsers');
 const dateFilteredUsers = require('../controllers/userControllers/dateFilteredUsers');
-const memberFilteredUsers= require('../controllers/userControllers/memberFilteredUsers');
+const memberFilteredUsers = require('../controllers/userControllers/memberFilteredUsers');
 const searchUsers = require('../controllers/userControllers/searchUsers');
 
 const router = express.Router();
@@ -95,18 +100,22 @@ router.get('/dateFilteredSellers', tokenVerify, dateFilteredSellers);
 router.get('/searchSellers', tokenVerify, searchSellers);
 
 
-router.post('/addProduct', tokenVerify, upload.array('productImages'), addCategory, addSubCategory, addProduct)
-router.get('/allProductsOfSpecifiedSeller/:seller_id',tokenVerify, allProductsOfSpecifiedSeller);
-router.put('/editProduct/:product_id',tokenVerify, upload.array('productImages'), addCategory, addSubCategory, editProduct);
+router.post('/addCategory', tokenVerify, upload.single('categoryImage'),addCategory);
+router.post('/addSubCategory', tokenVerify,upload.single('subcategoryImage'), addSubCategory);
+router.delete('/deleteCategory/:category_id', tokenVerify, deleteCategory);
+router.delete('/deleteSubCategory/:subcategory_id', tokenVerify, deleteSubCategory);
+router.post('/addProduct', tokenVerify, upload.array('productImages'), addProduct)
+router.get('/allProductsOfSpecifiedSeller/:seller_id', tokenVerify, allProductsOfSpecifiedSeller);
+router.put('/editProduct/:product_id', tokenVerify, upload.array('productImages'), editProduct);
 router.delete('/deleteProduct/:product_id', tokenVerify, deleteProduct);
-router.post('/addImage/:product_id',tokenVerify, upload.single('productImage'), addImage);
-router.patch('/deleteImage/:product_id',tokenVerify, deleteImage);
-router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id',tokenVerify, dateFilteredProductsOfSpecifiedSeller)
-router.get('/searchProductsOfSpecifiedSeller/:seller_id',tokenVerify,  searchProductsOfSpecifiedSeller);
-router.get('/dateFilteredProducts',tokenVerify, dateFilteredProducts);
-router.get('/searchProducts',tokenVerify,searchProducts);
-router.get('/featuredProducts',tokenVerify, featuredProducts);
-router.get('/maxSoldProducts',tokenVerify,maxSoldProducts);
+router.post('/addImage/:product_id', tokenVerify, upload.single('productImage'), addImage);
+router.patch('/deleteImage/:product_id', tokenVerify, deleteImage);
+router.get('/dateFilteredProductsOfSpecifiedSeller/:seller_id', tokenVerify, dateFilteredProductsOfSpecifiedSeller)
+router.get('/searchProductsOfSpecifiedSeller/:seller_id', tokenVerify, searchProductsOfSpecifiedSeller);
+router.get('/dateFilteredProducts', tokenVerify, dateFilteredProducts);
+router.get('/searchProducts', tokenVerify, searchProducts);
+router.get('/featuredProducts', tokenVerify, featuredProducts);
+router.get('/maxSoldProducts', tokenVerify, maxSoldProducts);
 
 
 

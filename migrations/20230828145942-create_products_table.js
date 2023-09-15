@@ -53,6 +53,11 @@ module.exports = {
       subcategory_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'subcategories',
+          key: 'subcategory_id',
+        },
+        onDelete: 'CASCADE',
       },
       warranty_information: {
         type: Sequelize.JSON,

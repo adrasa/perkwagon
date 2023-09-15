@@ -24,7 +24,7 @@ const addProduct = async (req, res) => {
             description: req.body.description,
             min_order: req.body.min_order,
             max_order: req.body.max_order,
-            subcategory_id: req.subcategory.subcategory_id,//foreign key
+            subcategory_id: req.body.subcategory_id,//foreign key
             warranty_information: req.body.warranty_information,
             refundable: req.body.refundable,
             return_period: req.body.return_period,

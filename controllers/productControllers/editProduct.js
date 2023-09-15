@@ -16,7 +16,6 @@ const editProduct = async (req, res) => {
             description: req.body.description,
             min_order: req.body.min_order,
             max_order: req.body.max_order,
-            category_id: req.category.category_id,//foreign key
             warranty_information: req.body.warranty_information,
             refundable: req.body.refundable,
             return_period: req.body.return_period,
@@ -30,6 +29,7 @@ const editProduct = async (req, res) => {
             used_material: req.body.used_material,
             seller_id: seller_id,
             is_featured:req.body.is_featured,
+            subcategory_id:req.body.subcategory_id,
         };
 
         await Products.update(updatedProduct, { where: { product_id } });

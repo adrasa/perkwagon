@@ -12,9 +12,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      subcategory_image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       category_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'categories',
+          key: 'category_id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
