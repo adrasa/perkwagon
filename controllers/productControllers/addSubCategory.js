@@ -1,5 +1,5 @@
 const { SubCategories } = require('../../models/index');
-const {uploadFile}=require('../../reusable_module/uploadFile');
+const uploadImage=require('../../reusable_module/uploadFile');
 const addSubCategory = async (req, res) => {
     try {
 
@@ -9,7 +9,7 @@ const addSubCategory = async (req, res) => {
                 
             } });
         if (!subcategory) {
-            const imageUrl = await uploadFile(req.file.buffer, req.file.originalname);
+            const imageUrl = await uploadImage(req.file.buffer, req.file.originalname);
             const newSubCategory = {
                 subcategory_name: req.body.subcategory_name,
                 category_id:req.body.category_id,
