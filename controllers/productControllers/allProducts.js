@@ -29,7 +29,7 @@ const allProducts = async (req, res) => {
         return res.status(200).json({ data:{products, productCount} });
 
     } catch (error) {
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: error.message});
     }
 };
 
