@@ -38,7 +38,7 @@ router.delete('/deleteAddress/:address_id', tokenVerify, deleteAddress);
 
 
 
-
+//order route
 router.post('/addOrder', tokenVerify, addOrder);
 
 

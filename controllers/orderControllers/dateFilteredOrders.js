@@ -1,5 +1,5 @@
-const { Orders, OrderItems, Products, Addresses, Sellers } = require('../../models/index');
-
+const { Orders, OrderItems, Products, Addresses, Sellers, ProductSpecifications } = require('../../models/index');
+const {Op}=require('sequelize');
 const dateFilteredOrders = async (req, res) => {
     try {
         const startDate = new Date(req.query.startDate); // Example: '2023-08-01'
@@ -12,28 +12,31 @@ const dateFilteredOrders = async (req, res) => {
 
         const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
         const limit = pageSize;
-
+        const countOrder = await Orders.count({
+            where: {
+                createdAt: {
+                    [Op.between]: [startDate, endDate],
+                },
+            },
+        });
         const allOrders = await Orders.findAll({
             include: [{
                 model: OrderItems,
-                as: 'orderItems',
-                attributes: ['order_item_id', 'quantity', 'sub_total', 'order_status', 'view_invoice'],
                 include: {
-                    model: Products,
-                    attributes: ['product_id', 'product_name', 'price'],
-                    include: {
-                        model: Sellers,
-
-                        attributes: ['seller_id', 'seller_name', 'business_email', 'business_phone_number', 'business_whatapp_number'],
+                    model: ProductSpecifications,
+                    include: [{
+                        model: Products,
+                        
                     },
+                    {
+                        model: Sellers,
+                    }],
+
                 },
             },
             {
                 model: Addresses,
-
-                attributes: ['address_id', 'address_line_1', 'address_line_2', 'city', 'state', 'pincode', 'country'],
             }],
-            attributes: ['order_id', 'auth_id', 'total_amount', 'payment_status', 'payment_method', 'createdAt'],
             offset,
             limit,
             order: [['createdAt', 'DESC']],
@@ -44,9 +47,9 @@ const dateFilteredOrders = async (req, res) => {
             },
         });
 
-        return res.status(200).json({ allOrders });
+        return res.status(200).json({ data:{allOrders,countOrder} });
     } catch (error) {
-        return res.status(500).json({ msg: 'Internal Server Error' });
+        return res.status(500).json({ msg: error.message });
     }
 };
 

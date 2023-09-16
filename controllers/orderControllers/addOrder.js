@@ -1,9 +1,9 @@
-const { where } = require('sequelize');
-const { Orders, OrderItems } = require('../../models/index');
-
+const { Orders, OrderItems,Users } = require('../../models/index');
+const countSubtotal = require('../../reusable_module/calculateSubtotal');
 const addOrder = async (req, res) => {
     try {
-        
+        let amount = 0;
+        const user=await Users.findOne({where:{auth_id:req.user.auth_id}});
         const newOrder = Orders.create({
             auth_id: req.user.auth_id,
             total_amount: amount,
@@ -14,21 +14,22 @@ const addOrder = async (req, res) => {
         });
 
         const orderItems = req.body.orderItems;
-        let amount=0;
-        orderItems.forEach(async (item) => {
+        
+        for(const item of orderItems) {
 
-            const sub_total = await Products.findOne({ where: { product_id: item.product_id } }).then((product) => product.price * item.quantity);
+            const sub_total=await countSubtotal(item.specification_id, item.quantity, user.membership_status)
 
-            const orderItem=await OrderItems.create({
+            await OrderItems.create({ 
                 order_id: newOrder.order_id,
                 product_id: item.product_id,
+                specification_id: item.specification_id,
                 seller_id: item.seller_id,
                 quantity: item.quantity,
                 sub_total: sub_total,
             });
 
             amount+=sub_total;
-        });
+        };
 
         await Orders.update({total_amount:amount}, {where:{order_id:newOrder.order_id}});
 

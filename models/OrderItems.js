@@ -10,6 +10,11 @@ const OrderItems = sequelize.define('OrderItems', {
     order_id: { //Foreign key
         type: DataTypes.INTEGER,
         allowNull: false,
+        references:{
+            model:'orders',
+            key:'order_id'
+        },
+        onDelete:'CASCADE',
     },
     product_id: { //Foreign key
         type: DataTypes.INTEGER,

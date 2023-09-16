@@ -23,8 +23,7 @@ const addToCart = async (req, res) => {
 
         // get the cart of the user
         const cart = await Cart.findOne({ where: { auth_id: user.auth_id } });
-
-
+     
         // calculate the subtotal of the item
         const subtotal = await calculateSubtotal(product_id, specification_id, quantity, isMember);
 
