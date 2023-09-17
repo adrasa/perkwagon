@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      specification_id: {   
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       seller_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

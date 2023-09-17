@@ -20,6 +20,10 @@ const OrderItems = sequelize.define('OrderItems', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    specification_id: { //Foreign key   
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     seller_id: { //Foreign key
         type: DataTypes.INTEGER,
         allowNull: false,
