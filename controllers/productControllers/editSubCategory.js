@@ -1,6 +1,6 @@
 const {SubCategories} = require('../../models/index');
-const removeImage = require('../../reusable_module/removeImage');
-const uploadImage = require('../../reusable_module/uploadImage');
+const removeImage = require('../../reusable_module/removeFile');
+const uploadImage = require('../../reusable_module/uploadFile');
 const editSubCategory = async (req, res) => {
     try {
         const subcategory = await SubCategories.findOne({ where: { sub_category_id: req.params.sub_category_id } });

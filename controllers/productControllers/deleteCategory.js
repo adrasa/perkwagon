@@ -1,5 +1,5 @@
 const {Categories, SubCategories}=require('../../models/index');
-const removeImage=require('../../reusable_module/removeImage');
+const removeImage=require('../../reusable_module/removeFile');
 const deleteCategory=async(req,res)=>{
     try{
         const subcategory=await SubCategories.findAll({where:{category_id:req.params.category_id}});

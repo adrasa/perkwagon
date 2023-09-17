@@ -1,6 +1,6 @@
 const {Categories}=require('../../models/index');
-const removeImage=require('../../reusable_module/removeImage');
-const uploadImage=require('../../reusable_module/uploadImage');
+const removeImage=require('../../reusable_module/removeFile');
+const uploadImage=require('../../reusable_module/uploadFile');
 const editCategory=async(req,res)=>{
     try{
         const category = await Categories.findOne({ where: { category_id: req.params.category_id } });
