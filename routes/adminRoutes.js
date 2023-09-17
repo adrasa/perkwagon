@@ -43,7 +43,8 @@ const deleteCategory = require('../controllers/productControllers/deleteCategory
 const deleteSubcategory = require('../controllers/productControllers/deleteSubCategory');
 const getCategories = require('../controllers/productControllers/getCategories');
 const allProducts = require('../controllers/productControllers/allProducts');
-
+const editCategory = require('../controllers/productControllers/editCategory');
+const editSubcategory = require('../controllers/productControllers/editSubCategory');
 
 //orderControllers
 const allOrders = require('../controllers/orderControllers/allOrders');
@@ -117,6 +118,8 @@ router.get('/searchProducts',searchProducts);
 router.get('/featuredProducts', tokenVerify, featuredProducts);
 router.get('/maxSoldProducts', tokenVerify, maxSoldProducts);
 router.get('/allProducts', allProducts);
+router.put('/editCategory/:category_id', tokenVerify, upload.single('categoryImage'), editCategory);
+router.put('/editSubCategory/:subcategory_id', tokenVerify, upload.single('subcategoryImage'), editSubcategory);
 
 
 router.get('/allOrders', tokenVerify, allOrders);

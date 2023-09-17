@@ -1,15 +1,18 @@
-const { SubCategories } = require('../../models/index');
-const removeImage = require('../../reusable_module/removeFile');
-const deleteSubCategory = async (req, res) => {
-    try {
-        const subcategory_id = req.params.subcategory_id;
-        const subcategory = await SubCategories.findOne({ where: { subcategory_id } });
-        if (!subcategory) return res.status(400).json({ msg: "No subcategory found" });
-        removeImage(subcategory.subcategory_image);
-        await SubCategories.destroy({ where: { subcategory_id } });
-        return res.status(200).json({ msg: 'SubCategory deleted successfully' });
-    } catch (err) {
-        return res.status(500).json({ msg: err.message });
+const {SubCategories, Products}=require('../../models/index');
+const removeImage=require('../../reusable_module/removeImage');
+const deleteSubCategory=async(req,res)=>{
+    try{
+        const product=await Products.findAll({where:{sub_category_id:req.params.sub_category_id}});
+        if(product.length>0){
+            return res.status(400).json({msg:'Delete Product First'});
+        }else{
+            const subcategory=await SubCategories.findOne({where:{sub_category_id:req.params.sub_category_id}});
+            await removeImage(subcategory.sub_category_image);
+            await SubCategories.destroy({where:{sub_category_id:req.params.sub_category_id}});
+            return res.status(200).json({msg:'Sub Category Deleted Successfully'});
+        }
+    }catch(error){
+        return res.status(500).json({msg:'Internal Server Error'});
     }
 }
-module.exports = deleteSubCategory;
+module.exports=deleteSubCategory;

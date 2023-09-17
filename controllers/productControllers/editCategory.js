@@ -1,16 +1,19 @@
-const { Categories } = require('../../models/index');
-const removeImage=require('../../reusable_module/removeFile');
-const deleteCategory = async (req, res) => {
-    try {
-        const category_id = req.params.category_id;
-        const category = await Categories.findOne({ where: { category_id } });
-        if (!category) return res.status(400).json({ msg: "No category found" });
-        removeImage(category.category_image);
-        await Categories.destroy({ where: { category_id } });
-        return res.status(200).json({ msg: 'Category deleted successfully' });
-    } catch (err) {
-        return res.status(500).json({ msg: err.message });
+const {Categories}=require('../../models/index');
+const removeImage=require('../../reusable_module/removeImage');
+const uploadImage=require('../../reusable_module/uploadImage');
+const editCategory=async(req,res)=>{
+    try{
+        const category = await Categories.findOne({ where: { category_id: req.params.category_id } });
+        let category_image=category.category_image;
+        if(req.file){
+            await removeImage(category_image);
+            category_image=await uploadImage(req.file);
+        }
+        await Categories.update({category_name:req.body.category_name,category_image:category_image},{where:{category_id:req.params.category_id}});
+            
+        return res.status(200).json({msg:'Category Updated Successfully'});
+    }catch(error){
+        return res.status(500).json({msg:'Internal Server Error'});
     }
-};
-
-module.exports = deleteCategory;
+}
+module.exports=editCategory;
